@@ -1,0 +1,98 @@
+---
+title: Data Types and Variables in AL
+description: Master primitive and complex AL data types, variable declaration, and initialization patterns.
+duration: 25
+difficulty: beginner
+order: 1
+objectives:
+  - Use primitive types — Integer, Decimal, Boolean, Text, DateTime
+  - Work with complex types — Record, Array, Option/Enum
+  - Declare and initialize variables correctly in AL
+tags:
+  - AL
+  - data types
+  - variables
+  - MB-820
+---
+
+## Primitive Data Types
+
+AL supports these fundamental data types:
+
+| Type | Purpose | Example |
+|------|---------|---------|
+| `Integer` | Whole numbers | `Count: Integer` |
+| `Decimal` | Numbers with fractions | `Amount: Decimal` |
+| `Boolean` | True/False | `IsActive: Boolean` |
+| `Text` | Strings (fixed length) | `Name: Text[100]` |
+| `Code` | Alphanumeric codes | `CustomerNo: Code[20]` |
+| `Date` | Calendar dates | `PostingDate: Date` |
+| `DateTime` | Date and time | `CreatedAt: DateTime` |
+| `GUID` | Globally unique identifier | `RecordId: Guid` |
+
+## Complex Data Types
+
+| Type | Purpose |
+|------|---------|
+| `Record` | Represents a row in a table |
+| `Array` | Collection of elements of the same type |
+| `Option` / `Enum` | Predefined set of values (Enum preferred in modern AL) |
+
+## Variable Declaration
+
+Variables are declared with the `var` keyword:
+
+```al title="VariableExamples.Codeunit.al"
+procedure ProcessCustomer()
+var
+    CustomerName: Text[100];
+    TotalAmount: Decimal;
+    IsProcessed: Boolean;
+    CustomerRec: Record Customer;
+begin
+    CustomerName := 'Contoso Ltd.';
+    TotalAmount := 1000.50;
+    IsProcessed := false;
+end;
+```
+
+<Callout type="info" title="Text Length">
+Always specify Text length: `Text[100]` not `Text`. Unbounded Text is only used in specific scenarios.
+</Callout>
+
+## Record Variables
+
+Record variables are the most common complex type — they represent table rows:
+
+```al
+var
+    SalesHeader: Record "Sales Header";
+    SalesLine: Record "Sales Line";
+begin
+    if SalesHeader.Get(SalesHeader."Document Type"::Order, 'SO-001') then
+        Message('Found order for %1', SalesHeader."Sell-to Customer Name");
+end;
+```
+
+## Enum vs Option
+
+Modern AL uses **Enum** instead of legacy **Option**:
+
+```al
+enum 50100 "Approval Status"
+{
+    value(0; Open) { }
+    value(1; Approved) { }
+    value(2; Rejected) { }
+}
+```
+
+<Callout type="warning" title="Option is Legacy">
+Option fields still exist in the base application but new development should use Enum objects.
+</Callout>
+
+## Key Revision Points (MB-820)
+
+- Know primitive vs complex data types
+- Record variables are used for all table operations
+- Enum replaces Option in modern AL development

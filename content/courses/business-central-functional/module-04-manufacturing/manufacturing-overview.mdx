@@ -1,0 +1,100 @@
+---
+title: Manufacturing Overview
+description: Learn BOMs, routings, work centers, MRP/MPS planning, and the production order lifecycle in Business Central.
+duration: 35
+difficulty: intermediate
+order: 1
+objectives:
+  - Understand BOMs, routings, and work centers as master data
+  - Differentiate MRP and MPS planning worksheets
+  - Follow the production order lifecycle from Simulated to Finished
+tags:
+  - functional
+  - manufacturing
+  - MRP
+  - MB-800
+  - Premium
+---
+
+## Overview
+
+Manufacturing is one of the most robust modules in Business Central. It provides a comprehensive suite of tools to plan, schedule, and execute production processes. **Manufacturing requires a Premium license.**
+
+<Callout type="warning" title="Premium License Required">
+Manufacturing (MRP, BOMs, Routings, Production Orders) is only available with the **Premium** license tier.
+</Callout>
+
+## Core Building Blocks (Master Data)
+
+Before you can manufacture an item, set up the master data representing the "recipe" and "instructions":
+
+### Bill of Materials (BOM)
+
+The list of raw materials and components and the exact quantities needed to produce one finished unit.
+
+*Example: A laptop BOM includes battery, motherboard, screen, and casing with specific quantities.*
+
+### Routing
+
+The step-by-step work instructions for production (e.g., Step 1: Assembly, Step 2: Laser Etching, Step 3: Quality Check).
+
+### Work Centers
+
+Physical locations or machines where work takes place. Work Centers track:
+
+- **Labor Costs** — Human effort costs
+- **Machine Costs** — Electricity, maintenance, depreciation
+- **Overhead** — Indirect operating costs
+- **Capacity/Scheduling** — Available hours and shifts
+
+## Planning the Work (MRP & MPS)
+
+| Worksheet | Purpose |
+|-----------|---------|
+| **Requisition Worksheet** | Primarily for **buying** components when inventory drops below safety stock |
+| **Planning Worksheet** | Comprehensive planning — analyzes sales orders, production orders, and inventory parameters |
+
+Within the Planning Worksheet:
+
+- **MRP (Material Requirements Planning)** — Calculates demand for raw materials and sub-assemblies
+- **MPS (Master Production Scheduling)** — Calculates demand for finished goods based on sales and forecasts
+
+## Production Order Lifecycle
+
+| Status | Description |
+|--------|-------------|
+| **Simulated** | Quoting and "what-if" scenarios — no planning impact |
+| **Planned** | Generated automatically by planning system |
+| **Firm Planned** | Draft order confirmed by planner — scheduling placeholder |
+| **Released** | Active on shop floor — materials can be picked, costs recorded |
+| **Finished** | Completed and closed — costs move from WIP to Finished Goods |
+
+## Recording Usage (Journals)
+
+Once an order is Released:
+
+| Journal | Records |
+|---------|---------|
+| **Consumption Journal** | Quantities of raw materials used |
+| **Capacity Journal** | Setup time, run time, and labor |
+| **Production Journal** | Both consumption and capacity simultaneously |
+
+## Flushing Methods
+
+| Method | Behavior |
+|--------|----------|
+| **Manual** | Users manually enter exact quantities consumed |
+| **Forward** | Auto-posts expected consumption when order is Released |
+| **Backward (Backflushing)** | Auto-assumes BOM/Routing quantities when operation finishes |
+
+## Key Financial Concepts
+
+- **WIP (Work in Process)** — Accumulated costs (material, labor, overhead) on the balance sheet while production is active. Transfers to Finished Goods only when the order is finished.
+- **Subcontracting** — Send components to external vendors for specific routing steps
+- **Item Tracking** — Lot Numbers and Serial Numbers for end-to-end traceability
+
+## Key Revision Points (MB-800)
+
+- BOM = what, Routing = how, Work Center = where
+- Production order statuses: Simulated → Planned → Firm Planned → Released → Finished
+- WIP holds costs until production is finished

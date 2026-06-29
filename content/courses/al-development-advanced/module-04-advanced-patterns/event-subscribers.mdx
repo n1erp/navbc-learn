@@ -1,0 +1,135 @@
+---
+title: Event Subscribers in AL
+description: Build extension-safe customizations using event publishers and subscribers without modifying the base application.
+duration: 35
+difficulty: advanced
+order: 1
+objectives:
+  - Subscribe to table, page, and codeunit events
+  - Use OnBefore and OnAfter event patterns
+  - Implement validation and business logic via event subscribers
+tags:
+  - AL
+  - events
+  - subscribers
+  - extensions
+  - MB-820
+---
+
+## Why Events?
+
+Event subscribers let you extend Business Central **without modifying Microsoft code**. This is the primary customization pattern for AppSource apps and upgrade-safe extensions.
+
+**Publisher** — Microsoft (or you) raises an event  
+**Subscriber** — Your code reacts to the event
+
+## Event Subscriber Syntax
+
+```al title="CustomerEventSub.Codeunit.al"
+codeunit 50103 "Customer Event Subscriber"
+{
+    [EventSubscriber(ObjectType::Table, Database::Customer, 'OnBeforeInsertEvent', '', false, false)]
+    local procedure OnBeforeCustomerInsert(var Rec: Record Customer; RunTrigger: Boolean)
+    begin
+        if Rec.Name = '' then
+            Error('Customer name cannot be empty.');
+    end;
+
+    [EventSubscriber(ObjectType::Table, Database::Customer, 'OnAfterInsertEvent', '', false, false)]
+    local procedure OnAfterCustomerInsert(var Rec: Record Customer; RunTrigger: Boolean)
+    begin
+        LogCustomerCreation(Rec."No.");
+    end;
+}
+```
+
+## Event Types
+
+| Event Pattern | When It Fires |
+|---------------|---------------|
+| `OnBeforeInsertEvent` | Before a record is inserted |
+| `OnAfterInsertEvent` | After a record is inserted |
+| `OnBeforeModifyEvent` | Before a record is modified |
+| `OnAfterModifyEvent` | After a record is modified |
+| `OnBeforeDeleteEvent` | Before a record is deleted |
+| `OnAfterValidateEvent` | After a field is validated |
+
+## Subscribing to Codeunit Events
+
+```al title="SalesPostingSub.Codeunit.al"
+[EventSubscriber(ObjectType::Codeunit, Codeunit::"Sales-Post", 'OnBeforePostSalesDoc', '', false, false)]
+local procedure OnBeforePostSalesDoc(var SalesHeader: Record "Sales Header")
+begin
+    SalesHeader.TestField("Approval Status", SalesHeader."Approval Status"::Approved);
+end;
+```
+
+<Callout type="info" title="EventSubscriber Parameters">
+The last two boolean parameters control skip and priority. Use `false, false` for standard subscribers. Set priority when execution order matters.
+</Callout>
+
+## Integration Events (Custom Publishers)
+
+You can publish your own events for other extensions to subscribe to:
+
+```al title="Publisher.Codeunit.al"
+codeunit 50110 "Bonus Publisher"
+{
+    [IntegrationEvent(false, false)]
+    procedure OnBeforeCalculateBonus(var CustomerNo: Code[20]; var BonusAmount: Decimal)
+    begin
+    end;
+
+    procedure CalculateBonus(CustomerNo: Code[20]): Decimal
+    var
+        BonusAmount: Decimal;
+    begin
+        OnBeforeCalculateBonus(CustomerNo, BonusAmount);
+        // Calculation logic...
+        exit(BonusAmount);
+    end;
+}
+```
+
+## SingleInstance Codeunits
+
+For stateful event handling across a session:
+
+```al title="SessionState.Codeunit.al"
+codeunit 50111 "Session State Manager"
+{
+    SingleInstance = true;
+
+    var
+        IsProcessing: Boolean;
+
+    procedure SetProcessing(Value: Boolean)
+    begin
+        IsProcessing := Value;
+    end;
+
+    procedure IsCurrentlyProcessing(): Boolean
+    begin
+        exit(IsProcessing);
+    end;
+}
+```
+
+## Best Practices
+
+1. **Keep subscribers small** — Delegate complex logic to separate procedures
+2. **Don't modify base app code** — Always use events for customization
+3. **Test upgrade compatibility** — Events are stable; triggers on base tables are not
+4. **Use IntegrationEvent** for your own extensibility points
+5. **Avoid infinite loops** — Be careful with Modify/Insert inside OnAfter events
+
+<Callout type="warning" title="RunTrigger Parameter">
+Check `RunTrigger` before executing subscriber logic. When `false`, the trigger was called internally and your subscriber should typically skip processing.
+</Callout>
+
+## Key Revision Points (MB-820)
+
+- Event subscribers are the upgrade-safe customization pattern
+- OnBefore events can prevent operations; OnAfter events react to completed operations
+- IntegrationEvent lets you build extensible apps
+- SingleInstance codeunits maintain state across a user session

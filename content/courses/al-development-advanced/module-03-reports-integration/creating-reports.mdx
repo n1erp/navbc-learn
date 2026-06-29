@@ -1,0 +1,107 @@
+---
+title: Creating Reports in AL
+description: Build AL reports with data items, nested tables, RDLC/Word layouts, and report extensions.
+duration: 30
+difficulty: intermediate
+order: 1
+objectives:
+  - Create reports with data items and sorting
+  - Build nested data item structures for header/line reports
+  - Customize report layouts with report extensions
+tags:
+  - AL
+  - reports
+  - RDLC
+  - MB-820
+---
+
+## Report Structure
+
+Reports present data in structured, printable formats. They consist of **data items** (tables) and a **layout** (RDLC, Word, or Excel).
+
+```al title="CustomerReport.Report.al"
+report 50100 "Customer Bonus Report"
+{
+    UsageCategory = ReportsAndAnalysis;
+    ApplicationArea = All;
+
+    dataset
+    {
+        dataitem(CustomerBonus; "Customer Bonus")
+        {
+            DataItemTableView = sorting("Customer No.");
+            column(CustomerNo; "Customer No.") { }
+            column(BonusAmount; "Bonus Amount") { }
+            column(BonusDate; "Bonus Date") { }
+        }
+    }
+
+    requestpage
+    {
+        // Filter and option fields for the user
+    }
+}
+```
+
+## Nested Data Items
+
+For header/line reports (like sales invoices):
+
+```al title="SalesReport.Report.al"
+dataset
+{
+    dataitem(SalesHeader; "Sales Header")
+    {
+        DataItemTableView = sorting("No.");
+        column(DocumentNo; "No.") { }
+        column(CustomerName; "Sell-to Customer Name") { }
+
+        dataitem(SalesLine; "Sales Line")
+        {
+            DataItemLink = "Document No." = field("No.");
+            column(ItemNo; "No.") { }
+            column(Description; Description) { }
+            column(Quantity; Quantity) { }
+            column(Amount; Amount) { }
+        }
+    }
+}
+```
+
+## Report Layouts
+
+| Layout Type | Tool | Best For |
+|-------------|------|----------|
+| **RDLC** | Visual Studio / Report Builder | Complex layouts, charts |
+| **Word** | Microsoft Word | Document-style reports |
+| **Excel** | Excel | Data export and analysis |
+
+Layouts are stored as separate files referenced in the report object.
+
+## Report Extensions
+
+Customize standard Microsoft reports without modifying them:
+
+```al title="CustomSalesReport.ReportExt.al"
+reportextension 50102 "Custom Sales Report" extends "Standard Sales - Invoice"
+{
+    dataset
+    {
+        add(SalesHeader)
+        {
+            column(CustomField; "Your Custom Field") { }
+        }
+    }
+}
+```
+
+<Callout type="info" title="Request Page">
+The `requestpage` section defines filters and options shown to users before running the report. Use `requestfilterfields` on data items for automatic filter fields.
+</Callout>
+
+## Key Revision Points (MB-820)
+
+- Data items define tables and relationships
+- Nested data items create header/line structures
+- Report extensions customize standard reports safely
+- Layouts are separate from AL dataset definition

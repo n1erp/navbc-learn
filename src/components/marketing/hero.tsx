@@ -50,12 +50,12 @@ export function Hero() {
 
           <div className="mt-12 flex flex-wrap items-center justify-center gap-8 text-sm text-muted-foreground">
             <div>
-              <span className="block text-2xl font-bold text-foreground">50+</span>
+              <span className="block text-2xl font-bold text-foreground">30+</span>
               Lessons
             </div>
             <div className="h-8 w-px bg-border" />
             <div>
-              <span className="block text-2xl font-bold text-foreground">3</span>
+              <span className="block text-2xl font-bold text-foreground">4</span>
               Courses
             </div>
             <div className="h-8 w-px bg-border" />

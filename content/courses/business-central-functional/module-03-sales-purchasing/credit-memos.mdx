@@ -1,0 +1,66 @@
+---
+title: Sales and Purchase Credit Memos
+description: Understand credit memos as reversal documents, their ledger and inventory impact, and key table references.
+duration: 25
+difficulty: beginner
+order: 1
+objectives:
+  - Differentiate sales vs purchase credit memos
+  - Understand ledger and inventory impact of credit memos
+  - Know key table IDs and application requirements
+tags:
+  - functional
+  - sales
+  - purchasing
+  - credit memo
+  - MB-800
+---
+
+## Overview
+
+A **Credit Memo** in Business Central is a **reversal document** used to correct or refund a previously posted transaction. The key difference is **who it applies to** — customers (sales) or vendors (purchases).
+
+## Sales vs. Purchase Credit Memos
+
+| Aspect | Sales Credit Memo | Purchase Credit Memo |
+|--------|-------------------|----------------------|
+| **Purpose** | Refund or adjust a **sale** | Refund or adjust a **purchase** |
+| **Affects** | Customer Ledger Entries | Vendor Ledger Entries |
+| **Inventory Impact** | Adds stock back (if returned) | Removes stock (if returned) |
+| **Financial Impact** | Reduces revenue | Reduces expenses |
+| **Linked to** | Sales Invoices | Purchase Invoices |
+| **Key Tables** | Sales Cr. Memo Header (6660), Line (6661) | Purch. Cr. Memo Header (6640), Line (6641) |
+
+## Creating a Sales Credit Memo
+
+1. Navigate to **Sales Credit Memos**
+2. Create from scratch or **Copy Document** from a posted sales invoice
+3. Enter return quantities and reasons
+4. Post the credit memo
+5. **Apply** the credit memo to the original invoice to close balances
+
+## Creating a Purchase Credit Memo
+
+Same workflow on the purchasing side — used when returning goods to vendors or receiving vendor credits.
+
+<Callout type="info" title="Application">
+A credit memo must be applied to the original invoice to close out the balances. Unapplied credit memos remain as open credits on the customer/vendor account.
+</Callout>
+
+## Return Reasons
+
+Configure **Return Reason Codes** to track why items are being returned or refunded. This supports quality analysis and vendor performance tracking.
+
+## Exact Cost Reversing
+
+When items are returned to inventory, BC can use **Exact Cost Reversing** to ensure the exact cost of the original shipment is used — critical for accurate inventory valuation.
+
+<Callout type="warning" title="Exam Tip">
+Remember the table IDs: Sales Cr. Memo = 6660/6661, Purchase Cr. Memo = 6640/6641. Inventory direction reverses: sales returns add stock, purchase returns remove stock.
+</Callout>
+
+## Key Revision Points (MB-800)
+
+- Credit memos are reversal documents — they reduce revenue (sales) or expenses (purchase)
+- Application to original invoice is required to close balances
+- Return reasons and exact cost reversing are important configuration options

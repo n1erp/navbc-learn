@@ -1,0 +1,128 @@
+---
+title: Control Structures in AL
+description: Master if/else, case statements, for/while/repeat loops, and error handling in AL.
+duration: 30
+difficulty: beginner
+order: 3
+objectives:
+  - Write if/else and case conditional statements
+  - Use for, while, and repeat-until loops
+  - Handle errors with Error() and TestField()
+tags:
+  - AL
+  - control flow
+  - loops
+  - MB-820
+---
+
+## Conditional Statements
+
+### If / Else
+
+```al title="IfElseExample.al"
+var
+    Score: Integer;
+begin
+    Score := 85;
+    if Score >= 90 then
+        Message('Grade: A')
+    else if Score >= 80 then
+        Message('Grade: B')
+    else
+        Message('Grade: C');
+end;
+```
+
+### Case Statement
+
+Use `case` when comparing one expression against multiple values:
+
+```al title="CaseExample.al"
+var
+    Status: Option Open,Released,Posted;
+begin
+    case Status of
+        Status::Open:
+            Message('Document is open.');
+        Status::Released:
+            Message('Document is released.');
+        Status::Posted:
+            Message('Document is posted.');
+    end;
+end;
+```
+
+<Callout type="info" title="Microsoft Style Guide">
+Use `case` for more than two alternatives. Use `if-then-else` for simple binary conditions. Indent value sets by four spaces.
+</Callout>
+
+## Looping Constructs
+
+### For Loop
+
+```al title="ForLoop.al"
+var
+    i: Integer;
+begin
+    for i := 1 to 10 do begin
+        Message('Iteration: %1', i);
+    end;
+end;
+```
+
+### While Loop
+
+```al title="WhileLoop.al"
+var
+    i: Integer;
+begin
+    i := 0;
+    while i < 1000 do begin
+        i := i + 1;
+    end;
+end;
+```
+
+### Repeat-Until (Record Iteration)
+
+The most common loop pattern in BC — iterating table records:
+
+```al title="RepeatUntil.al"
+var
+    Customer: Record Customer;
+begin
+    if Customer.FindSet(true) then
+        repeat
+            if Customer."Name 2" = '' then begin
+                Customer."Name 2" := Customer.Name;
+                Customer.Modify();
+            end;
+        until Customer.Next() = 0;
+end;
+```
+
+<Callout type="tip" title="FindSet vs Find">
+`FindSet` returns multiple records for iteration. `Find('-')` returns the first record only. Use `FindSet(true)` when you need to modify records during iteration.
+</Callout>
+
+## Error Handling
+
+```al title="ErrorHandling.al"
+var
+    Divisor: Integer;
+begin
+    Divisor := 0;
+    if Divisor = 0 then
+        Error('Division by zero is not allowed.');
+end;
+```
+
+- **`Error('message')`** — Stops execution and shows an error dialog
+- **`TestField(FieldName)`** — Validates a field is not blank/zero
+- **`FieldError(FieldName, 'message')`** — Shows a field-specific error
+
+## Key Revision Points (MB-820)
+
+- `repeat...until` is the standard pattern for record iteration
+- `case` for multiple branches, `if` for binary decisions
+- Always use `begin...end` for multi-statement blocks

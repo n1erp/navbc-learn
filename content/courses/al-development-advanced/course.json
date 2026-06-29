@@ -1,0 +1,61 @@
+{
+  "id": "al-development-advanced",
+  "title": "AL Development Advanced",
+  "description": "Take your AL skills further with object types, control structures, reports, web services integration, and event-driven architecture — aligned with the MB-820 developer certification.",
+  "shortDescription": "Advanced AL: reports, integration, events, and language deep dives.",
+  "slug": "al-development-advanced",
+  "level": "intermediate",
+  "duration": 420,
+  "lessonsCount": 9,
+  "modulesCount": 4,
+  "featured": true,
+  "published": true,
+  "tags": ["AL", "MB-820", "events", "integration", "reports", "advanced"],
+  "thumbnail": "/images/courses/al-advanced.jpg",
+  "instructor": {
+    "name": "NAVBC Team",
+    "role": "BC Developers & Architects"
+  },
+  "learningOutcomes": [
+    "Master AL data types, operators, and control structures",
+    "Understand all AL object types and their purposes",
+    "Design tables with keys, indexes, and relations",
+    "Create reports with data items and layouts",
+    "Integrate BC with external systems via web services and APIs",
+    "Build event subscribers for extension-safe customization"
+  ],
+  "prerequisites": [
+    "AL Development Fundamentals course",
+    "Basic understanding of tables, pages, and codeunits"
+  ],
+  "modules": [
+    {
+      "id": "module-01-al-language",
+      "title": "AL Language Deep Dive",
+      "description": "Data types, operators, expressions, and control flow in AL.",
+      "order": 1,
+      "lessons": ["data-types-and-variables", "operators-and-expressions", "control-structures"]
+    },
+    {
+      "id": "module-02-al-objects",
+      "title": "AL Object Types",
+      "description": "Complete taxonomy of AL objects and advanced table design.",
+      "order": 2,
+      "lessons": ["al-object-types", "managing-tables-deep-dive"]
+    },
+    {
+      "id": "module-03-reports-integration",
+      "title": "Reports & Integration",
+      "description": "Report development and connecting BC to external systems.",
+      "order": 3,
+      "lessons": ["creating-reports", "integration-and-web-services"]
+    },
+    {
+      "id": "module-04-advanced-patterns",
+      "title": "Advanced Patterns",
+      "description": "Event subscribers and production-grade AL architecture.",
+      "order": 4,
+      "lessons": ["event-subscribers"]
+    }
+  ]
+}

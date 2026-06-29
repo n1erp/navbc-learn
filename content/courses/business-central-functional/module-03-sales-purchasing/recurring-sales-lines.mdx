@@ -1,0 +1,64 @@
+---
+title: Recurring Sales Lines
+description: Set up Standard Sales Codes to automate repeat orders and bundled product lines on sales documents.
+duration: 20
+difficulty: beginner
+order: 2
+objectives:
+  - Create Standard Sales Codes with predefined item bundles
+  - Assign recurring lines to customers
+  - Configure Manual, Automatic, and Always Ask insertion options
+tags:
+  - functional
+  - sales
+  - automation
+  - MB-800
+---
+
+## Overview
+
+**Recurring Sales Lines** (Standard Sales Codes) let you predefine sets of items, resources, or services that are frequently sold together. Instead of manually entering lines on every sales order, invoice, or quote, Business Central automates insertion — reducing errors and saving time.
+
+## Setting Up Recurring Sales Lines
+
+### Step 1: Define the Standard Sales Code
+
+1. Navigate to **Standard Sales Codes**
+2. Create a new code with a unique identifier and description (e.g., "CONFERENCE-PACK")
+3. Add items, resources, or services with quantities on the lines
+
+### Step 2: Assign to Customers
+
+1. Open the **Customer Card**
+2. Go to the **Recurring Sales Lines** FastTab
+3. Link the standard sales code to the customer
+4. Set the insertion option
+
+## Insertion Options
+
+| Option | Behavior |
+|--------|----------|
+| **Manual** | User must manually insert lines from the standard code |
+| **Automatic** | Lines are inserted automatically when creating a document |
+| **Always Ask** | BC prompts whether to insert the standard lines |
+
+<Callout type="tip" title="Best Practice">
+Use **Always Ask** for new customers until you confirm the bundle is always appropriate. Switch to **Automatic** for established repeat-order customers.
+</Callout>
+
+## Usage in Documents
+
+- **Sales Orders & Invoices:** Lines insert based on your chosen option when creating a document for a linked customer
+- **Quotes:** Ensures consistent offerings and simplifies upselling bundled products
+
+## Business Benefits
+
+- **Time saving:** Drastically reduces manual data entry for frequent combinations
+- **Consistency:** Sales staff always include the right components in a bundle
+- **Error reduction:** Eliminates forgotten line items on repeat orders
+
+## Key Revision Points (MB-800)
+
+- Standard Sales Codes define the bundle; customer assignment controls when they apply
+- Three insertion options: Manual, Automatic, Always Ask
+- Works on sales orders, invoices, and quotes

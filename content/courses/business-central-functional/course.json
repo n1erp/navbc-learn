@@ -1,0 +1,60 @@
+{
+  "id": "business-central-functional",
+  "title": "Business Central Functional Consultant",
+  "description": "Master Business Central from a functional perspective. Learn company setup, licensing, finance, sales, purchasing, and manufacturing — aligned with the MB-800 certification path.",
+  "shortDescription": "Functional BC skills: setup, finance, sales, purchasing, and manufacturing.",
+  "slug": "business-central-functional",
+  "level": "beginner",
+  "duration": 360,
+  "lessonsCount": 10,
+  "modulesCount": 4,
+  "featured": true,
+  "published": true,
+  "tags": ["functional", "MB-800", "finance", "sales", "manufacturing", "consultant"],
+  "thumbnail": "/images/courses/bc-functional.jpg",
+  "instructor": {
+    "name": "NAVBC Team",
+    "role": "BC Functional Consultants"
+  },
+  "learningOutcomes": [
+    "Create and configure Business Central companies",
+    "Understand BC licensing tiers and module availability",
+    "Process customer payments and credit memos",
+    "Set up recurring sales and purchase lines",
+    "Configure manufacturing master data and item planning"
+  ],
+  "prerequisites": [
+    "Basic understanding of ERP concepts",
+    "Familiarity with business processes (sales, purchasing, finance)"
+  ],
+  "modules": [
+    {
+      "id": "module-01-core-setup",
+      "title": "Core Setup & Licensing",
+      "description": "Company creation, environments, and Business Central licensing models.",
+      "order": 1,
+      "lessons": ["creating-companies", "licensing-and-modules"]
+    },
+    {
+      "id": "module-02-financial-management",
+      "title": "Financial Management",
+      "description": "Customer payments, cash flow, and financial operations.",
+      "order": 2,
+      "lessons": ["customer-payments"]
+    },
+    {
+      "id": "module-03-sales-purchasing",
+      "title": "Sales & Purchasing",
+      "description": "Credit memos, recurring lines, and document workflows.",
+      "order": 3,
+      "lessons": ["credit-memos", "recurring-sales-lines", "recurring-purchase-lines"]
+    },
+    {
+      "id": "module-04-manufacturing",
+      "title": "Manufacturing & Planning",
+      "description": "BOMs, routings, production orders, and item planning parameters.",
+      "order": 4,
+      "lessons": ["manufacturing-overview", "item-planning", "item-replenishment"]
+    }
+  ]
+}

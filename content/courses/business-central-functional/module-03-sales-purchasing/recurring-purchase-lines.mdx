@@ -1,0 +1,65 @@
+---
+title: Recurring Purchase Lines
+description: Configure Standard Purchase Codes to automate repeat procurement from vendors on purchase documents.
+duration: 20
+difficulty: beginner
+order: 3
+objectives:
+  - Create Standard Purchase Codes for frequent vendor orders
+  - Assign recurring lines to vendor cards
+  - Understand insertion options on purchase orders and quotes
+tags:
+  - functional
+  - purchasing
+  - automation
+  - MB-800
+---
+
+## Overview
+
+**Recurring Purchase Lines** simplify procurement for items, services, or charges that are frequently ordered together from the same vendor. Instead of manually entering details on every purchase order, invoice, or quote, you automate the process.
+
+## Setting Up Recurring Purchase Lines
+
+### Step 1: Define the Standard Purchase Code
+
+1. Navigate to **Standard Purchase Codes**
+2. Create a new code with a unique identifier (e.g., "REPAIR-KIT")
+3. Add items, resources, G/L accounts, or item charges with quantities
+
+### Step 2: Assign to Vendors
+
+1. Open the **Vendor Card**
+2. Link the standard purchase code to the vendor
+3. Set insertion options: **Manual**, **Automatic**, or **Always Ask**
+
+## Insertion Options
+
+| Option | Behavior |
+|--------|----------|
+| **Manual** | User inserts lines manually from the code |
+| **Automatic** | Lines insert automatically on new documents |
+| **Always Ask** | BC prompts before inserting |
+
+## Usage in Documents
+
+- **Purchase Orders:** BC offers to insert standard lines based on vendor setup
+- **Purchase Quotes:** Ensures all necessary components are included in every quote to the vendor
+
+<Callout type="info" title="Flexibility">
+Standard Purchase Codes can include Items, Services (G/L Accounts, Resources), and Charges (Item Charges) — not just inventory items.
+</Callout>
+
+## Sales vs Purchase Recurring Lines
+
+| Aspect | Recurring Sales Lines | Recurring Purchase Lines |
+|--------|----------------------|--------------------------|
+| Setup page | Standard Sales Codes | Standard Purchase Codes |
+| Assigned on | Customer Card | Vendor Card |
+| Documents | Sales Orders, Invoices, Quotes | Purchase Orders, Invoices, Quotes |
+
+## Key Revision Points (MB-800)
+
+- Mirror of recurring sales lines but on the procurement side
+- Can include items, services, and charges
+- Understand Manual vs Automatic vs Always Ask insertion

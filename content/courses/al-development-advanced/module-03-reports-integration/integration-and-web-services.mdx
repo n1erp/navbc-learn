@@ -1,0 +1,136 @@
+---
+title: Integration and Web Services
+description: Expose BC data via web services, call external APIs with HttpClient, and import/export data with XmlPorts.
+duration: 35
+difficulty: advanced
+order: 2
+objectives:
+  - Publish SOAP and OData web services from AL codeunits
+  - Call external REST APIs using HttpClient
+  - Import and export data with XmlPort objects
+tags:
+  - AL
+  - integration
+  - API
+  - web services
+  - MB-820
+---
+
+## Web Services in Business Central
+
+BC exposes data via **SOAP** and **OData** web services. Publish codeunits, pages, or queries as web services from the BC admin.
+
+### Service-Enabled Codeunit
+
+```al title="CustomerWebService.Codeunit.al"
+codeunit 50100 "Customer Web Service"
+{
+    [ServiceEnabled]
+    procedure GetCustomerBalance(CustomerNo: Code[20]): Decimal
+    var
+        Customer: Record Customer;
+    begin
+        if Customer.Get(CustomerNo) then
+            exit(Customer."Balance (LCY)");
+        Error('Customer %1 not found.', CustomerNo);
+    end;
+}
+```
+
+Publish this codeunit as a web service in BC: **Web Services** page → New → Object Type: Codeunit.
+
+## Calling External APIs
+
+Use `HttpClient` to integrate with external systems:
+
+```al title="ExternalAPI.Codeunit.al"
+procedure CallExternalAPI(): Text
+var
+    HttpClient: HttpClient;
+    HttpResponseMessage: HttpResponseMessage;
+    HttpHeaders: HttpHeaders;
+    JsonResponse: Text;
+begin
+    HttpClient.DefaultRequestHeaders().Add('Authorization', 'Bearer ' + GetApiToken());
+    HttpClient.Get('https://api.example.com/customers', HttpResponseMessage);
+
+    if HttpResponseMessage.IsSuccessStatusCode then begin
+        HttpResponseMessage.Content.ReadAs(JsonResponse);
+        exit(JsonResponse);
+    end else
+        Error('API call failed with status %1', HttpResponseMessage.HttpStatusCode);
+end;
+```
+
+<Callout type="warning" title="Security">
+Never hardcode API keys in AL code. Use Isolated Storage or Azure Key Vault for secrets.
+</Callout>
+
+## OData and API Pages
+
+Modern integrations use **API Pages** (OData v4):
+
+```al title="BonusAPI.Page.al"
+page 50100 "Bonus API"
+{
+    PageType = API;
+    APIPublisher = 'navbc';
+    APIGroup = 'learning';
+    APIVersion = 'v1.0';
+    EntityName = 'customerBonus';
+    EntitySetName = 'customerBonuses';
+    SourceTable = "Customer Bonus";
+    DelayedInsert = true;
+
+    layout
+    {
+        area(Content)
+        {
+            field(id; Rec."Entry No.") { }
+            field(customerNo; Rec."Customer No.") { }
+            field(amount; Rec."Bonus Amount") { }
+        }
+    }
+}
+```
+
+## XmlPort for Data Exchange
+
+Import/export data in XML, CSV, or fixed-width formats:
+
+```al title="CustomerImport.XmlPort.al"
+xmlport 50100 "Customer Import"
+{
+    Direction = Import;
+    Format = VariableText;
+
+    schema
+    {
+        textelement(Root)
+        {
+            tableelement(Customer; Customer)
+            {
+                fieldelement(No; Customer."No.") { }
+                fieldelement(Name; Customer.Name) { }
+            }
+        }
+    }
+}
+```
+
+## Integration Patterns
+
+| Pattern | Use Case |
+|---------|----------|
+| **API Pages (OData)** | Modern REST integrations, Power Platform |
+| **SOAP Web Services** | Legacy system integrations |
+| **HttpClient** | Call external REST/JSON APIs |
+| **XmlPort** | File-based import/export, EDI |
+| **Event Subscribers** | React to BC events for sync triggers |
+
+## Key Revision Points (MB-820)
+
+- `[ServiceEnabled]` exposes codeunit procedures as web services
+- HttpClient for outbound API calls
+- API Pages are the modern OData integration approach
+- XmlPorts handle file-based data exchange

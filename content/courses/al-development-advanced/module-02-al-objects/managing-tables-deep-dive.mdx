@@ -1,0 +1,163 @@
+---
+title: Managing Tables — Keys, Indexes, and Relations
+description: Advanced table design with primary keys, secondary indexes, field properties, TableRelation, and triggers.
+duration: 35
+difficulty: intermediate
+order: 2
+objectives:
+  - Design primary and secondary keys for performance
+  - Configure field properties and TableRelation lookups
+  - Implement table triggers for data validation
+tags:
+  - AL
+  - tables
+  - keys
+  - indexes
+  - MB-820
+---
+
+## Defining Tables
+
+```al title="CustomerBonus.Table.al"
+table 50100 "Customer Bonus"
+{
+    DataClassification = CustomerContent;
+
+    fields
+    {
+        field(1; "No."; Code[20])
+        {
+            DataClassification = CustomerContent;
+            Caption = 'No.';
+        }
+        field(2; Name; Text[100])
+        {
+            DataClassification = CustomerContent;
+            Caption = 'Name';
+        }
+        field(3; "Phone No."; Text[30])
+        {
+            DataClassification = EndUserIdentifiableInformation;
+            Caption = 'Phone No.';
+        }
+    }
+
+    keys
+    {
+        key(PK; "No.")
+        {
+            Clustered = true;
+        }
+    }
+}
+```
+
+## Primary Keys and Indexes
+
+The **primary key** uniquely identifies records. Only one key can be `Clustered = true` (the physical storage order).
+
+```al title="KeysExample.al"
+keys
+{
+    key(PK; "No.")
+    {
+        Clustered = true;
+    }
+    key(Name; Name)
+    {
+        // Secondary index for name lookups
+    }
+    key(CustomerDate; "Customer No.", "Posting Date")
+    {
+        // Composite index for filtered queries
+    }
+}
+```
+
+<Callout type="tip" title="Performance">
+Add secondary keys on fields you frequently filter or sort by. BC uses keys like database indexes for query optimization.
+</Callout>
+
+## Field Properties
+
+| Property | Purpose |
+|----------|---------|
+| `Caption` | Display label (translatable) |
+| `TableRelation` | Lookup link to another table |
+| `NotBlank` | Required field validation |
+| `Editable` | Whether user can modify |
+| `InitValue` | Default value on insert |
+| `MinValue` / `MaxValue` | Range validation |
+| `ValidateTableRelation` | Validate lookup exists |
+| `DataClassification` | GDPR compliance (mandatory) |
+
+## TableRelation
+
+Links fields to other tables for lookups and validation:
+
+```al
+field(10; "Customer No."; Code[20])
+{
+    TableRelation = Customer."No.";
+    ValidateTableRelation = true;
+}
+```
+
+Filtered relations:
+
+```al
+field(11; "Item No."; Code[20])
+{
+    TableRelation = Item."No." where("Item Category Code" = field("Category Code"));
+}
+```
+
+## Table Triggers
+
+```al
+trigger OnInsert()
+begin
+    TestField("Customer No.");
+    "Created Date" := Today;
+end;
+
+trigger OnModify()
+begin
+    "Modified Date" := Today;
+end;
+
+trigger OnDelete()
+begin
+    if HasRelatedRecords() then
+        Error('Cannot delete — related records exist.');
+end;
+
+trigger OnRename()
+begin
+    // Runs when primary key changes
+end;
+```
+
+## Field Triggers
+
+```al
+field(5; "Bonus Percent"; Decimal)
+{
+    trigger OnValidate()
+    begin
+        if ("Bonus Percent" < 0) or ("Bonus Percent" > 100) then
+            Error('Bonus percent must be between 0 and 100.');
+    end;
+}
+```
+
+<Callout type="warning" title="OnValidate">
+`OnValidate` runs when a field value changes — use it for field-level validation and calculated fields.
+</Callout>
+
+## Key Revision Points (MB-820)
+
+- One clustered primary key per table
+- Secondary keys improve query performance
+- TableRelation enables lookups and referential integrity
+- Triggers implement business logic at the data layer

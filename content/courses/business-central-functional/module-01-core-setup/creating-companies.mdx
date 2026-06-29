@@ -1,0 +1,71 @@
+---
+title: Creating Companies in Business Central
+description: Learn the four company creation types, permission requirements, and when to use evaluation vs production environments.
+duration: 20
+difficulty: beginner
+order: 1
+objectives:
+  - Understand the four company creation options in BC
+  - Know the SUPER permission requirement for company creation
+  - Differentiate evaluation, production, and blank company setups
+tags:
+  - functional
+  - setup
+  - company
+  - MB-800
+---
+
+## Overview
+
+When you sign up for Business Central, you receive default environments to get started — typically a demonstration company (CRONUS) and an empty company ("My Company"). Understanding how to create and manage companies is a core administrative task for functional consultants.
+
+<Callout type="info" title="Environments">
+In Business Central online, companies live inside **environments** (Production, Sandbox). Sandbox environments are for testing; Production environments hold live business data.
+</Callout>
+
+## Permission Requirements
+
+To create a new company, the user **must** be assigned to the **Super** permission set. Without this permission set, the Create Company option will not be available.
+
+## Company Creation Types
+
+When creating a new company, you have four main options depending on your data needs:
+
+### 1. Evaluation — Sample Data
+
+Includes sample data for testing and demonstration. Ideal for learning BC features, training new users, or evaluating the product before go-live.
+
+### 2. Advanced Evaluation — Complete Sample Data
+
+Provides comprehensive sample data covering **manufacturing** and **service management** scenarios. Use this when you need to explore Premium-tier modules without configuring data from scratch.
+
+### 3. Production — Setup Data Only
+
+Contains only basic setup data (posting groups, number series, etc.) — **no master data or transactions**. Ready for data migration from a legacy system or another ERP.
+
+### 4. Create New — No Data
+
+A completely blank company. You set up everything from scratch: chart of accounts, posting groups, number series, dimensions, and all master data.
+
+<Callout type="tip" title="Consultant Tip">
+For client implementations, always use **Production — Setup Data Only** or **Create New — No Data**. Never go live with evaluation sample data.
+</Callout>
+
+## Comparison Table
+
+| Type | Sample Data | Manufacturing | Best For |
+|------|-------------|---------------|----------|
+| Evaluation | Basic | No | Learning, demos |
+| Advanced Evaluation | Complete | Yes | Premium module demos |
+| Production — Setup Only | Setup only | Setup only | Implementations |
+| Create New — No Data | None | None | Full custom setup |
+
+## Key Revision Points (MB-800)
+
+- Differentiate between all 4 company creation types
+- Know the prerequisite permission: **SUPER** permission set
+- Understand that evaluation companies are not suitable for production use
+
+## Further Reading
+
+- [Microsoft Learn — Functional Consultant certification](https://learn.microsoft.com/en-us/credentials/certifications/d365-business-central-functional-consultant-associate/)

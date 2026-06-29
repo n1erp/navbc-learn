@@ -1,0 +1,76 @@
+---
+title: Customer Payments
+description: Learn the three methods for recording customer payments in Business Central and when to use each approach.
+duration: 25
+difficulty: beginner
+order: 1
+objectives:
+  - Use Cash Receipts Journal for flexible payment recording
+  - Process bulk payments with Register Customer Payments
+  - Consolidate daily payments using Deposits
+tags:
+  - functional
+  - finance
+  - payments
+  - MB-800
+---
+
+## Overview
+
+Managing customer payments effectively is essential for maintaining cash flow and accurate financial records. Business Central provides multiple methods for recording payments, each designed for different business scenarios.
+
+## Method 1: Cash Receipts Journal
+
+**Use case:** Versatile tool for businesses that receive payments in different ways — single invoice payments, bulk payments, or partial payments.
+
+**Features:**
+- Apply payments directly to open customer ledger entries
+- Handle multiple payment methods (check, bank transfer, cash)
+- Support payment discounts and write-offs
+- Full control over application logic
+
+**When to use:** When you need flexibility — different payment types, partial applications, or manual matching.
+
+## Method 2: Register Customer Payments
+
+**Use case:** Designed for businesses that process a high volume of invoices and need a faster way to match payments.
+
+**Features:**
+- Simplified page to quickly process payments for multiple customers
+- Streamlined matching workflow
+- Optimized for high-volume AR departments
+
+**When to use:** When processing many customer payments daily and speed is the priority.
+
+## Method 3: Deposits
+
+**Use case:** Ideal for businesses that receive multiple payments daily and want to consolidate them into a single bank deposit before bank reconciliation.
+
+**Features:**
+- Groups multiple payments into one deposit slip
+- Easy match against the bank statement during reconciliation
+- Tracks deposit date and bank account
+
+**When to use:** When you batch payments before taking them to the bank (retail, cash-heavy businesses).
+
+## Comparison
+
+| Method | Flexibility | Speed | Best For |
+|--------|-------------|-------|----------|
+| Cash Receipts Journal | High | Medium | Mixed payment types |
+| Register Customer Payments | Medium | High | High-volume AR |
+| Deposits | Medium | High | Batch bank deposits |
+
+## Payment Application
+
+Payments can be applied **automatically** (using application rules) or **manually** (selecting specific invoices). Unapplied payments remain on the customer account as open credits.
+
+<Callout type="tip" title="Payment Discounts">
+Configure payment discount terms on customer payment terms. BC automatically calculates available discounts when applying payments within the discount period.
+</Callout>
+
+## Key Revision Points (MB-800)
+
+- Understand when to use Cash Receipts Journal vs. Register Customer Payments
+- Know that payments can be applied automatically or manually
+- Payment discounts incentivize early payment and reduce AR aging

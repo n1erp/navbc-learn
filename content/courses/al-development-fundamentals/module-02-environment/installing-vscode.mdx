@@ -1,0 +1,99 @@
+---
+title: Installing Visual Studio Code
+description: Set up Visual Studio Code with the AL Language extension and essential BC development tools.
+duration: 20
+difficulty: beginner
+order: 1
+objectives:
+  - Install Visual Studio Code
+  - Install the AL Language extension
+  - Configure essential WALDO extensions
+  - Understand the BC development workspace
+tags:
+  - VS Code
+  - setup
+  - tools
+---
+
+## Why Visual Studio Code?
+
+Microsoft chose **Visual Studio Code** as the official IDE for Business Central AL development. It provides:
+
+- AL Language IntelliSense and syntax highlighting
+- Integrated compilation and publishing
+- Git source control
+- Debugger support for AL code
+- Rich extension ecosystem
+
+<Callout type="info">
+Visual Studio (full IDE) is **not** used for BC development. Always use VS Code with the AL Language extension.
+</Callout>
+
+## Step 1: Download VS Code
+
+Download VS Code from [code.visualstudio.com](https://code.visualstudio.com/download).
+
+Choose the **System Installer** version on Windows for the best experience with Docker integration.
+
+## Step 2: Install AL Language Extension
+
+Open VS Code and install these extensions:
+
+1. **AL Language** (Microsoft) — `ms-dynamics-smb.al`
+2. **AL Object Designer** (Andrei Dragos) — Navigate BC objects
+3. **AL Code Outline** — Structure navigation
+
+Search in the Extensions panel (`Ctrl+Shift+X`) and click Install.
+
+## Step 3: WALDO's Extension Pack
+
+[WALDO](https://waldo.blog/) maintains essential BC development extensions:
+
+- **AL CodeCop** — Additional code analysis rules
+- **AZ AL Dev Tools** — Productivity tools for AL development
+- **CRS AL Language Extension** — Object naming and creation helpers
+
+```json title="settings.json"
+{
+    "al.enableCodeAnalysis": true,
+    "al.codeAnalyzers": [
+        "${CodeCop}",
+        "${UICop}",
+        "${PerTenantExtensionCop}"
+    ],
+    "al.enableCodeActions": true,
+    "al.backgroundCodeAnalysis": true
+}
+```
+
+## Step 4: Verify Installation
+
+Create a test workspace:
+
+1. `Ctrl+Shift+P` → **AL: Go!**
+2. Select your country/region
+3. Choose **"Your own server"** or **"Docker"** (covered in next lesson)
+4. VS Code creates a starter `app.json` and `HelloWorld.al`
+
+If compilation succeeds, your environment is ready.
+
+<Callout type="tip" title="Pro Tip">
+Pin the AL panel to your sidebar. It shows symbols, dependencies, and publishing status at a glance.
+</Callout>
+
+## Recommended VS Code Settings
+
+```json title=".vscode/settings.json"
+{
+    "editor.formatOnSave": true,
+    "al.ruleSetPath": "./.vscode/ruleset.json",
+    "files.exclude": {
+        "**/.alpackages": true,
+        "**/.altemplates": true
+    }
+}
+```
+
+## Next Steps
+
+In the next lesson, we'll set up Docker and launch your first Business Central sandbox container.

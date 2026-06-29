@@ -1,0 +1,54 @@
+{
+  "id": "al-development-fundamentals",
+  "title": "AL Development Fundamentals",
+  "description": "Master the Application Language (AL) from scratch. Learn syntax, data types, variables, and the core building blocks of Business Central extension development. This comprehensive course takes you from zero to building your first AL objects.",
+  "shortDescription": "Learn AL programming from fundamentals to your first BC extension.",
+  "slug": "al-development-fundamentals",
+  "level": "beginner",
+  "duration": 480,
+  "lessonsCount": 8,
+  "modulesCount": 3,
+  "featured": true,
+  "published": true,
+  "tags": ["AL", "fundamentals", "beginner", "VS Code"],
+  "thumbnail": "/images/courses/al-fundamentals.jpg",
+  "instructor": {
+    "name": "NAVBC Team",
+    "role": "BC Consultants & Developers"
+  },
+  "learningOutcomes": [
+    "Understand AL syntax and programming fundamentals",
+    "Set up a complete BC development environment with Docker",
+    "Create tables, pages, and codeunits in AL",
+    "Work with events, triggers, and procedures",
+    "Build and publish your first BC extension"
+  ],
+  "prerequisites": [
+    "Basic programming knowledge (any language)",
+    "Windows 10/11 Pro or Enterprise",
+    "Familiarity with ERP concepts is helpful but not required"
+  ],
+  "modules": [
+    {
+      "id": "module-01-introduction",
+      "title": "Introduction to AL",
+      "description": "Get started with AL programming and understand the Business Central development landscape.",
+      "order": 1,
+      "lessons": ["introduction-to-al", "al-syntax-basics"]
+    },
+    {
+      "id": "module-02-environment",
+      "title": "Development Environment",
+      "description": "Set up Visual Studio Code, Docker, and your first BC sandbox container.",
+      "order": 2,
+      "lessons": ["installing-vscode", "docker-setup", "creating-your-first-project"]
+    },
+    {
+      "id": "module-03-tables",
+      "title": "Working with Tables",
+      "description": "Learn to create and extend tables — the foundation of every BC extension.",
+      "order": 3,
+      "lessons": ["creating-tables", "table-extensions", "flowfields-and-calcfields"]
+    }
+  ]
+}

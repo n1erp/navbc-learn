@@ -1,0 +1,154 @@
+---
+title: Table Extensions
+description: Extend standard Business Central tables with custom fields using table extensions.
+duration: 30
+difficulty: intermediate
+order: 2
+objectives:
+  - Create table extensions for standard BC tables
+  - Add custom fields to Customer, Item, and Sales tables
+  - Understand field ID ranges in extensions
+  - Use extension events on standard tables
+tags:
+  - table extension
+  - AL
+  - customization
+---
+
+## Why Table Extensions?
+
+You cannot modify Microsoft's base tables directly. **Table extensions** let you add fields, keys, and triggers to existing tables without touching the base application.
+
+This is the primary customization pattern for per-tenant and AppSource extensions.
+
+## Creating a Table Extension
+
+```al title="CustomerExt.TableExt.al"
+tableextension 50100 CustomerExt extends Customer
+{
+    fields
+    {
+        field(50100; "Loyalty Points"; Integer)
+        {
+            Caption = 'Loyalty Points';
+            DataClassification = CustomerContent;
+            Editable = false;
+        }
+        field(50101; "Loyalty Tier"; Enum "Loyalty Tier")
+        {
+            Caption = 'Loyalty Tier';
+            DataClassification = CustomerContent;
+        }
+        field(50102; "Last Bonus Date"; Date)
+        {
+            Caption = 'Last Bonus Date';
+            DataClassification = CustomerContent;
+        }
+    }
+
+    keys
+    {
+        key(Loyalty; "Loyalty Tier", "Loyalty Points")
+        {
+        }
+    }
+}
+```
+
+<Callout type="info" title="Field Numbering">
+Extension fields must use IDs from your allocated `idRanges` in `app.json`. Never use field IDs from the base application range.
+</Callout>
+
+## Extending Multiple Tables
+
+Common tables developers extend:
+
+```al title="SalesHeaderExt.TableExt.al"
+tableextension 50101 SalesHeaderExt extends "Sales Header"
+{
+    fields
+    {
+        field(50100; "Approval Status"; Enum "Approval Status")
+        {
+            Caption = 'Approval Status';
+            DataClassification = CustomerContent;
+        }
+        field(50101; "Approved By"; Code[50])
+        {
+            Caption = 'Approved By';
+            DataClassification = EndUserIdentifiableInformation;
+            Editable = false;
+        }
+    }
+}
+```
+
+## Extension Triggers
+
+You can add triggers to extended tables:
+
+```al
+tableextension 50102 ItemExt extends Item
+{
+    fields
+    {
+        field(50100; "Warranty Months"; Integer)
+        {
+            Caption = 'Warranty Months';
+            DataClassification = CustomerContent;
+
+            trigger OnValidate()
+            begin
+                if "Warranty Months" < 0 then
+                    Error('Warranty months cannot be negative.');
+            end;
+        }
+    }
+
+    trigger OnBeforeInsert()
+    begin
+        if "Warranty Months" = 0 then
+            "Warranty Months" := 12; // Default 12 months
+    end;
+}
+```
+
+## Page Extensions for New Fields
+
+Fields added via table extensions need corresponding page extensions to appear in the UI:
+
+```al title="CustomerCardExt.PageExt.al"
+pageextension 50100 CustomerCardExt extends "Customer Card"
+{
+    layout
+    {
+        addafter("Credit Limit (LCY)")
+        {
+            field("Loyalty Points"; Rec."Loyalty Points")
+            {
+                ApplicationArea = All;
+                ToolTip = 'Specifies the customer loyalty points balance.';
+            }
+            field("Loyalty Tier"; Rec."Loyalty Tier")
+            {
+                ApplicationArea = All;
+            }
+        }
+    }
+}
+```
+
+<Callout type="tip">
+Always create page extensions alongside table extensions. Fields invisible to users provide no business value.
+</Callout>
+
+## Best Practices
+
+1. **Group related fields** — Use consistent field number ranges per feature
+2. **Document with ToolTip** — Every field needs a `ToolTip` on its page extension
+3. **Plan ID ranges** — Reserve ranges per module in `app.json`
+4. **Test upgrades** — Extensions must survive BC version upgrades
+
+## Next Steps
+
+Learn about FlowFields and CalcFields — powerful computed field patterns unique to BC/NAV.

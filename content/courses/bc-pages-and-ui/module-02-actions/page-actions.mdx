@@ -1,0 +1,113 @@
+---
+title: Page Actions
+description: Add actions, promoted actions, and navigation to Business Central pages.
+duration: 30
+difficulty: intermediate
+order: 1
+objectives:
+  - Create action groups and actions on pages
+  - Configure promoted actions in the action bar
+  - Run codeunits from page actions
+  - Add navigation actions to related pages
+tags:
+  - actions
+  - pages
+  - navigation
+---
+
+## Page Actions
+
+Actions appear in the action bar (ribbon) of BC pages. They're how users trigger business processes.
+
+## Action Structure
+
+```al title="BonusCardActions.Page.al"
+page 50104 "Bonus Card Actions"
+{
+    PageType = Card;
+    SourceTable = "Customer Bonus";
+
+    actions
+    {
+        area(Processing)
+        {
+            action(Post)
+            {
+                ApplicationArea = All;
+                Caption = 'Post';
+                Image = Post;
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+                ToolTip = 'Post the bonus to the customer ledger.';
+
+                trigger OnAction()
+                var
+                    BonusMgt: Codeunit "Bonus Management";
+                begin
+                    BonusMgt.PostBonus(Rec);
+                end;
+            }
+            action(Approve)
+            {
+                ApplicationArea = All;
+                Caption = 'Approve';
+                Image = Approve;
+                Promoted = true;
+                PromotedCategory = Process;
+
+                trigger OnAction()
+                begin
+                    Rec.Validate(Status, Rec.Status::Approved);
+                    Rec.Modify(true);
+                end;
+            }
+        }
+        area(Navigation)
+        {
+            action(Customer)
+            {
+                ApplicationArea = All;
+                Caption = 'Customer';
+                Image = Customer;
+                RunObject = page "Customer Card";
+                RunPageLink = "No." = field("Customer No.");
+            }
+        }
+        area(Reporting)
+        {
+            action(PrintBonus)
+            {
+                ApplicationArea = All;
+                Caption = 'Print Bonus Statement';
+                Image = Print;
+                RunObject = report "Bonus Statement";
+            }
+        }
+    }
+}
+```
+
+## Action Areas
+
+| Area | Location | Use For |
+|------|----------|---------|
+| `Processing` | Home tab | Business operations (Post, Release) |
+| `Navigation` | Navigate tab | Links to related records |
+| `Reporting` | Report tab | Print and export |
+| `Creation` | New tab | Create related records |
+
+<Callout type="info" title="Promoted Actions">
+`Promoted = true` shows the action in the main action bar. Use `PromotedIsBig = true` for primary actions like Post and Release.
+</Callout>
+
+## RunObject vs OnAction
+
+- **RunObject** — Opens another page/report without code
+- **OnAction** — Runs AL code (call codeunits, validate, etc.)
+
+Choose RunObject for simple navigation; OnAction when you need business logic.
+
+## Congratulations!
+
+You've learned the core page types and actions. Combine these patterns with table development to build complete BC features.

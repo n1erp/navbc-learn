@@ -1,0 +1,22 @@
+[
+  {
+    "id": "bc-developer",
+    "title": "Business Central Developer",
+    "description": "Complete path from AL beginner to production-ready extension developer. Covers fundamentals, UI development, and advanced patterns.",
+    "slug": "bc-developer",
+    "courses": ["al-development-fundamentals", "bc-pages-and-ui"],
+    "duration": 840,
+    "level": "beginner",
+    "published": true
+  },
+  {
+    "id": "bc-consultant",
+    "title": "BC Functional Consultant",
+    "description": "Learn Business Central configuration, finance, sales, purchasing, and warehouse management from a functional perspective.",
+    "slug": "bc-consultant",
+    "courses": ["al-development-fundamentals"],
+    "duration": 600,
+    "level": "beginner",
+    "published": true
+  }
+]

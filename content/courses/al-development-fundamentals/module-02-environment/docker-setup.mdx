@@ -1,0 +1,113 @@
+---
+title: Docker Setup for Business Central
+description: Install Docker Desktop and configure your Windows environment for BC container development.
+duration: 45
+difficulty: beginner
+order: 2
+objectives:
+  - Install Docker Desktop on Windows
+  - Enable WSL 2 and Hyper-V
+  - Understand BC Docker images and containers
+  - Know the difference between sandbox and production containers
+tags:
+  - Docker
+  - setup
+  - containers
+---
+
+## Why Docker for BC Development?
+
+Docker containers provide isolated, reproducible Business Central environments. Benefits:
+
+- **Fast setup** — Spin up a BC sandbox in minutes
+- **Clean state** — Delete and recreate without affecting your machine
+- **Version flexibility** — Run different BC versions side by side
+- **Team consistency** — Same environment for all developers
+
+<Callout type="warning" title="Not for Production">
+Microsoft does not support Docker containers for production BC deployments. Use containers for development and testing only.
+</Callout>
+
+## Prerequisites
+
+- Windows 10/11 **Pro or Enterprise** (version 1607+)
+- OR Windows Server 2016/2019/2022
+- Administrator privileges
+- At least 16 GB RAM (32 GB recommended)
+- 50+ GB free disk space
+
+## Step 1: Enable WSL 2
+
+Open PowerShell as Administrator:
+
+```powershell title="Enable WSL 2"
+wsl --install
+```
+
+Restart your computer when prompted. WSL 2 is required for Docker Desktop on Windows.
+
+## Step 2: Enable Hyper-V
+
+```powershell title="Windows 10 - Enable Hyper-V"
+Enable-WindowsOptionalFeature -Online -FeatureName Hyper-V -All
+```
+
+On Windows Server:
+
+```powershell title="Windows Server - Install Hyper-V"
+Install-WindowsFeature Hyper-V
+```
+
+## Step 3: Install Docker Desktop
+
+Download from [docker.com/products/docker-desktop](https://www.docker.com/products/docker-desktop).
+
+During installation:
+1. Enable **WSL 2** backend
+2. Add Docker to PATH
+3. Restart when complete
+
+Verify installation:
+
+```powershell title="Verify Docker"
+docker --version
+docker run hello-world
+```
+
+## Understanding BC Docker Images
+
+A Docker **image** is a template; a **container** is a running instance.
+
+BC images are hosted on Microsoft's container registry (`mcr.microsoft.com`). They include:
+
+- Windows Server Core base
+- Business Central application
+- SQL Server database
+- Cronus demo database (for sandboxes)
+
+## BC Container Helper
+
+Install the PowerShell module that simplifies BC container management:
+
+```powershell title="Install BcContainerHelper"
+Install-Module BcContainerHelper -Force
+```
+
+This module provides commands like `New-BcContainer`, `Get-BcContainerAppInfo`, and `Publish-BcContainerApp`.
+
+## Container Isolation Modes
+
+Windows containers support two runtime modes:
+
+| Mode | Description |
+|------|-------------|
+| **Process isolation** | Shares host kernel — faster, less memory |
+| **Hyper-V isolation** | Full VM isolation — more compatible |
+
+<Callout type="tip">
+Use **process isolation** when your Windows version matches the container image. Fall back to Hyper-V isolation if you encounter compatibility issues.
+</Callout>
+
+## Next Steps
+
+In the next lesson, you'll create your first BC container and AL project using a single PowerShell script.

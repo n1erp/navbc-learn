@@ -1,0 +1,123 @@
+---
+title: Introduction to AL
+description: Learn what the Application Language is, how it fits into Business Central, and the core concepts every BC developer needs to know.
+duration: 25
+difficulty: beginner
+order: 1
+objectives:
+  - Understand what AL (Application Language) is and its role in BC
+  - Learn about AL object types (Tables, Pages, Codeunits, Reports)
+  - Understand triggers, events, and procedures
+  - Know the difference between base application and extensions
+tags:
+  - AL
+  - introduction
+  - fundamentals
+---
+
+## What is Business Central?
+
+Microsoft Dynamics 365 **Business Central** is a comprehensive cloud ERP solution for small and medium-sized businesses. It automates and streamlines business processes across finance, manufacturing, sales, supply chain, projects, and services.
+
+Business Central provides a complete view of your organization — connecting sales, service, finance, and operations teams to help you adapt faster and deliver results.
+
+<Callout type="info" title="Cloud-First ERP">
+Business Central runs primarily in the cloud (SaaS), but on-premises deployments are also supported. Extension development works the same way regardless of deployment model.
+</Callout>
+
+## What is AL?
+
+The **Application Language (AL)** is the programming language used to write code for Microsoft Dynamics 365 Business Central. With AL, you can:
+
+- Manipulate data in the BC database
+- Create new business logic and UI
+- Subscribe to events in the base application
+- Connect to external web services
+- Build AppSource-ready extensions
+
+AL is written in **Visual Studio Code** with the AL Language extension. It replaced C/AL (the old NAV development language) and is the only supported language for BC extension development.
+
+## AL Object Types
+
+Every BC application is built from AL objects. The main types you'll work with:
+
+| Object | Purpose |
+|--------|---------|
+| **Table** | Defines data structure and business logic for data |
+| **Page** | User interface for viewing and editing data |
+| **Codeunit** | Business logic not tied to a specific table |
+| **Report** | Formatted output and data processing |
+| **Query** | Read-only data access for reporting |
+| **XmlPort** | Import/export data in XML or text formats |
+| **Enum** | Fixed set of options (replaces legacy Option type) |
+
+## Triggers and Events
+
+In AL, objects have **triggers** — procedures that run automatically when specific events occur. Trigger names always start with `On`:
+
+```al title="CustomerTable.Table.al"
+table 50100 "Customer Bonus"
+{
+    fields
+    {
+        field(1; "Customer No."; Code[20]) { }
+        field(2; "Bonus Amount"; Decimal) { }
+    }
+
+    trigger OnInsert()
+    begin
+        ValidateBonus();
+    end;
+
+    local procedure ValidateBonus()
+    begin
+        if "Bonus Amount" < 0 then
+            Error('Bonus amount cannot be negative.');
+    end;
+}
+```
+
+You can also write **event subscribers** to react to events in the base application without modifying Microsoft code:
+
+```al title="SalesEvents.Codeunit.al"
+codeunit 50101 "Sales Event Subscriber"
+{
+    [EventSubscriber(ObjectType::Table, Database::"Sales Header", 'OnAfterInsertEvent', '', false, false)]
+    local procedure OnAfterSalesHeaderInsert(var Rec: Record "Sales Header")
+    begin
+        // Custom logic after a sales order is created
+    end;
+}
+```
+
+## Variables and Data Types
+
+Like other programming languages, AL supports variables for temporary data storage:
+
+```al
+var
+    CustomerNo: Code[20];
+    TotalAmount: Decimal;
+    IsProcessed: Boolean;
+    ItemDescription: Text[100];
+```
+
+AL has **intrinsic data types** including `Integer`, `Decimal`, `Boolean`, `Text`, `Code`, `Date`, `DateTime`, `GUID`, and more.
+
+<Callout type="tip" title="Start Simple">
+Focus on understanding tables and pages first. Most BC development revolves around these two object types. Codeunits and events come naturally once you're comfortable with the basics.
+</Callout>
+
+## Extensions vs. Base Application
+
+Microsoft ships the **base application** — you cannot modify it directly. Instead, you build **extensions** that layer on top:
+
+1. **Per-tenant extensions (PTE)** — Customizations for a single customer
+2. **AppSource apps** — Published extensions available to all BC customers
+3. **Global extensions** — Microsoft's own feature additions
+
+Your AL code always lives in an extension project, keeping the base application upgrade-safe.
+
+## Next Steps
+
+In the next lesson, we'll dive into AL syntax — comments, compound statements, regions, and the coding conventions used by professional BC developers.

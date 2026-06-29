@@ -1,0 +1,10 @@
+{
+  "id": "inventory-dashboard",
+  "title": "Inventory Dashboard",
+  "description": "Create a Role Center with inventory KPIs, charts, and quick actions using pages, queries, and page extensions.",
+  "slug": "inventory-dashboard",
+  "difficulty": "intermediate",
+  "duration": 150,
+  "tags": ["role center", "dashboard", "inventory", "KPI"],
+  "published": true
+}

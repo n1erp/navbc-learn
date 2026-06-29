@@ -1,0 +1,10 @@
+{
+  "id": "sales-approval-workflow",
+  "title": "Sales Approval Workflow",
+  "description": "Implement a multi-level sales order approval workflow using events, enums, and approval pages in Business Central.",
+  "slug": "sales-approval-workflow",
+  "difficulty": "advanced",
+  "duration": 240,
+  "tags": ["workflow", "approval", "events", "sales"],
+  "published": true
+}

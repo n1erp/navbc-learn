@@ -1,0 +1,10 @@
+{
+  "id": "customer-loyalty-extension",
+  "title": "Customer Loyalty Extension",
+  "description": "Build a complete customer loyalty points system with tables, pages, codeunits, and posting logic — a real-world BC extension project.",
+  "slug": "customer-loyalty-extension",
+  "difficulty": "intermediate",
+  "duration": 180,
+  "tags": ["extension", "loyalty", "posting", "tables"],
+  "published": true
+}

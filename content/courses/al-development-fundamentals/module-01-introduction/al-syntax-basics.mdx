@@ -1,0 +1,138 @@
+---
+title: AL Syntax Basic
+description: Master AL syntax including comments, compound statements, code regions, and XML documentation comments.
+duration: 30
+difficulty: beginner
+order: 2
+objectives:
+  - Write single-line and block comments in AL
+  - Use XML documentation comments for IntelliSense
+  - Structure code with #region directives
+  - Understand compound statements with begin/end
+tags:
+  - AL
+  - syntax
+  - comments
+---
+
+## Comments in AL
+
+Comments help other developers understand your code. AL supports two comment styles.
+
+### Single-line comments
+
+Use double slashes `//` for single-line comments:
+
+```al
+// This is a comment
+CustomerNo := 'C00001'; // Inline comment
+```
+
+In VS Code, press `Ctrl+/` to toggle line comments.
+
+### Block comments
+
+Use `/*` and `*/` for multi-line block comments:
+
+```al
+/*
+    This is a block comment
+    spanning multiple lines.
+    Useful for longer explanations.
+*/
+```
+
+Press `Alt+Shift+A` in VS Code to toggle block comments.
+
+## XML Documentation Comments
+
+XML comments improve readability and enable **IntelliSense** in VS Code for anyone extending your code:
+
+```al title="Email.Codeunit.al"
+/// <summary>
+/// Provides functionality to create and send e-mails.
+/// </summary>
+codeunit 8901 "Email"
+{
+    /// <summary>
+    /// Enqueues an email in the outbox to be sent in the background.
+    /// </summary>
+    /// <param name="EmailMessageId">The ID of the email to enqueue</param>
+    procedure Enqueue(EmailMessageId: Guid)
+    begin
+        EmailImpl.Enqueue(EmailMessageId);
+    end;
+}
+```
+
+<Callout type="tip" title="Documentation Best Practices">
+- Never state the obvious — explain *why*, not *what*
+- Use active words: "Sets...", "Gets...", "Specifies..."
+- List preconditions for parameters
+- Document exceptions and side effects
+</Callout>
+
+## Code Regions
+
+Use `#region` and `#endregion` to organize large files:
+
+```al
+#region Sales Processing
+    local procedure ProcessSalesOrder(SalesHeader: Record "Sales Header")
+    begin
+        // Processing logic
+    end;
+#endregion
+
+#region Purchase Processing
+    local procedure ProcessPurchaseOrder(PurchaseHeader: Record "Purchase Header")
+    begin
+        // Processing logic
+    end;
+#endregion
+```
+
+Regions can be collapsed in VS Code for easier navigation — especially useful in large codeunits.
+
+## Compound Statements
+
+A compound statement groups multiple statements between `begin` and `end`:
+
+```al
+if Amount > 1000 then begin
+    ApplyDiscount(Amount);
+    LogTransaction(Amount);
+    NotifyManager(Amount);
+end;
+```
+
+Every `if`, `repeat`, `while`, and `case` that executes more than one statement requires `begin`/`end`.
+
+## Assignment and Expressions
+
+AL uses `:=` for assignment:
+
+```al
+Total := Quantity * UnitPrice;
+CustomerName := 'Contoso Ltd.';
+IsValid := (Amount > 0) and (Amount < 10000);
+```
+
+<Callout type="warning" title="Semicolons Required">
+Every statement in AL must end with a semicolon (`;`). Missing semicolons are one of the most common compile errors for beginners.
+</Callout>
+
+## Naming Conventions
+
+Follow Microsoft's AL coding guidelines:
+
+| Element | Convention | Example |
+|---------|-----------|---------|
+| Objects | PascalCase with quotes | `table 50100 "Customer Bonus"` |
+| Procedures | PascalCase | `procedure CalculateTotal()` |
+| Variables | PascalCase | `TotalAmount: Decimal` |
+| Constants | PascalCase | `MaxRetryCount: Integer` |
+
+## Next Steps
+
+With syntax fundamentals covered, you'll set up your complete development environment in Module 2.

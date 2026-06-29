@@ -1,0 +1,45 @@
+{
+  "id": "bc-pages-and-ui",
+  "title": "Pages & User Interface",
+  "description": "Master Business Central page development. Create Card, List, Document, and Role Center pages with actions, factboxes, and modern UI patterns.",
+  "shortDescription": "Build professional BC user interfaces with pages and page extensions.",
+  "slug": "bc-pages-and-ui",
+  "level": "intermediate",
+  "duration": 360,
+  "lessonsCount": 4,
+  "modulesCount": 2,
+  "featured": true,
+  "published": true,
+  "tags": ["pages", "UI", "Card", "List", "actions"],
+  "thumbnail": "/images/courses/pages-ui.jpg",
+  "instructor": {
+    "name": "NAVBC Team",
+    "role": "BC Consultants & Developers"
+  },
+  "learningOutcomes": [
+    "Create Card, List, and Document pages",
+    "Add actions, promoted actions, and factboxes",
+    "Build page extensions for standard BC pages",
+    "Apply modern UI patterns and best practices"
+  ],
+  "prerequisites": [
+    "AL Development Fundamentals course",
+    "Understanding of tables and table extensions"
+  ],
+  "modules": [
+    {
+      "id": "module-01-page-types",
+      "title": "Page Types",
+      "description": "Learn the different page types and when to use each.",
+      "order": 1,
+      "lessons": ["page-card", "page-list", "page-document"]
+    },
+    {
+      "id": "module-02-actions",
+      "title": "Actions & Navigation",
+      "description": "Add actions, promoted actions, and navigation to your pages.",
+      "order": 2,
+      "lessons": ["page-actions"]
+    }
+  ]
+}

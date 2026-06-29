@@ -1,0 +1,70 @@
+---
+title: Creating Page List
+description: Build List pages for displaying and filtering multiple records in Business Central.
+duration: 25
+difficulty: intermediate
+order: 2
+objectives:
+  - Create List pages with repeater controls
+  - Add sorting and filtering capabilities
+  - Configure editable lists
+  - Link lists to card pages for drill-down
+tags:
+  - pages
+  - List
+  - UI
+---
+
+## List Pages
+
+**List pages** display multiple records in a grid (repeater). They're the entry point for most BC modules — users browse lists and drill into cards.
+
+```al title="CustomerBonusList.Page.al"
+page 50101 "Customer Bonus List"
+{
+    PageType = List;
+    ApplicationArea = All;
+    UsageCategory = Lists;
+    SourceTable = "Customer Bonus";
+    CardPageId = "Customer Bonus Card";
+    Editable = false;
+
+    layout
+    {
+        area(Content)
+        {
+            repeater(General)
+            {
+                field("Entry No."; Rec."Entry No.") { }
+                field("Customer No."; Rec."Customer No.") { }
+                field("Bonus Amount"; Rec."Bonus Amount") { }
+                field("Bonus Date"; Rec."Bonus Date") { }
+            }
+        }
+    }
+}
+```
+
+## Key Properties
+
+| Property | Purpose |
+|----------|---------|
+| `CardPageId` | Page opened when user drills down |
+| `Editable` | Allow inline editing in the list |
+| `SourceTableView` | Default sorting and filtering |
+| `UsageCategory` | Where page appears in Tell Me search |
+
+## SourceTableView for Default Sorting
+
+```al
+SourceTableView = sorting("Bonus Date" desc) 
+    where("Bonus Amount" = filter(>0));
+```
+
+<Callout type="info">
+Setting `UsageCategory = Lists` makes your page discoverable via the BC search (Tell Me / Alt+Q).
+</Callout>
+
+## Next Steps
+
+Document pages combine a header with line items — essential for orders, invoices, and journals.

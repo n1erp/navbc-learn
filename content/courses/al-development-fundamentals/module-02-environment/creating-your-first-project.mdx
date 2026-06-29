@@ -1,0 +1,173 @@
+---
+title: Creating Your First Project
+description: Launch a BC Docker container and create your first AL extension project from scratch.
+duration: 40
+difficulty: beginner
+order: 3
+objectives:
+  - Create a BC sandbox container with BcContainerHelper
+  - Initialize an AL extension project
+  - Understand app.json configuration
+  - Publish and test your first extension
+tags:
+  - Docker
+  - project
+  - app.json
+  - publishing
+---
+
+## Create a BC Sandbox Container
+
+Open PowerShell as Administrator and run:
+
+```powershell title="New-BcContainer.ps1"
+$containerName = 'bcserver'
+$password = 'P@ssw0rd'
+$securePassword = ConvertTo-SecureString -String $password -AsPlainText -Force
+$credential = New-Object pscredential 'admin', $securePassword
+$auth = 'UserPassword'
+$artifactUrl = Get-BcArtifactUrl -type 'Sandbox' -country 'us' -select 'Latest'
+
+New-BcContainer `
+    -accept_eula `
+    -containerName $containerName `
+    -credential $credential `
+    -auth $auth `
+    -artifactUrl $artifactUrl `
+    -vsixFile (Get-LatestAlLanguageExtensionUrl) `
+    -updateHosts
+```
+
+<Callout type="info" title="First Run Takes Time">
+The first container creation downloads several GB of images. Subsequent containers start much faster thanks to Docker layer caching.
+</Callout>
+
+This script:
+1. Downloads the latest BC sandbox artifact
+2. Creates a Docker container named `bcserver`
+3. Installs the AL Language extension into VS Code
+4. Updates your hosts file for `bcserver` DNS resolution
+
+Access BC at: `https://bcserver` (user: `admin`, password: `P@ssw0rd`)
+
+## Create an AL Project
+
+In VS Code:
+
+1. `Ctrl+Shift+P` → **AL: Go!**
+2. Select **"A starter extension"**
+3. Choose folder location
+4. Select **"Your own server"**
+5. Enter server: `https://bcserver`
+6. Authentication: **UserName and Password**
+7. Username: `admin`, Password: `P@ssw0rd`
+
+## Understanding app.json
+
+Every AL extension requires an `app.json` manifest:
+
+```json title="app.json"
+{
+    "id": "00000000-0000-0000-0000-000000000001",
+    "name": "My First Extension",
+    "publisher": "NAVBC",
+    "version": "1.0.0.0",
+    "brief": "My first BC extension",
+    "description": "Learning AL development with NAVBC Learn",
+    "privacyStatement": "https://navbc.com/privacy",
+    "EULA": "https://navbc.com/eula",
+    "help": "https://learn.navbc.com",
+    "url": "https://navbc.com",
+    "logo": "logo.png",
+    "dependencies": [],
+    "screenshots": [],
+    "platform": "1.0.0.0",
+    "application": "24.0.0.0",
+    "idRanges": [
+        { "from": 50100, "to": 50149 }
+    ],
+    "resourceExposurePolicy": {
+        "allowDebugging": true,
+        "allowDownloadingSource": true,
+        "includeSourceInSymbolDownload": true
+    },
+    "runtime": "13.0",
+    "features": ["NoImplicitWith"]
+}
+```
+
+Key fields:
+- **id** — Unique GUID for your app
+- **idRanges** — Object ID range allocated to your extension
+- **application** — Minimum BC version required
+- **dependencies** — Other apps your extension depends on
+
+## Your First AL Object
+
+Replace the default HelloWorld with a custom table:
+
+```al title="CustomerBonus.Table.al"
+table 50100 "Customer Bonus"
+{
+    Caption = 'Customer Bonus';
+    DataClassification = CustomerContent;
+
+    fields
+    {
+        field(1; "Entry No."; Integer)
+        {
+            Caption = 'Entry No.';
+            AutoIncrement = true;
+        }
+        field(2; "Customer No."; Code[20])
+        {
+            Caption = 'Customer No.';
+            TableRelation = Customer."No.";
+        }
+        field(3; "Bonus Amount"; Decimal)
+        {
+            Caption = 'Bonus Amount';
+            DecimalPlaces = 2 : 2;
+        }
+        field(4; "Bonus Date"; Date)
+        {
+            Caption = 'Bonus Date';
+        }
+    }
+
+    keys
+    {
+        key(PK; "Entry No.")
+        {
+            Clustered = true;
+        }
+        key(Customer; "Customer No.")
+        {
+        }
+    }
+}
+```
+
+## Publish Your Extension
+
+1. `Ctrl+Shift+P` → **AL: Publish**
+2. Choose **"bcserver"** as target
+3. Wait for compilation and publishing
+4. Open BC → Search for "Customer Bonus"
+
+<Callout type="tip" title="Download Available">
+Check the Downloads section below for a ZIP containing the complete starter project files.
+</Callout>
+
+## Troubleshooting
+
+| Issue | Solution |
+|-------|----------|
+| Container won't start | Ensure Hyper-V and WSL 2 are enabled |
+| Publish fails | Check `app.json` ID ranges don't conflict |
+| Can't connect to BC | Verify hosts file has `bcserver` entry |
+| Symbol download fails | Run `AL: Download symbols` manually |
+
+## Next Steps
+
+With your environment ready, Module 3 dives deep into table development — the foundation of every BC extension.

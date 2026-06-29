@@ -1,0 +1,150 @@
+---
+title: Creating Tables in AL
+description: Learn to define tables with fields, keys, triggers, and data classification in Business Central.
+duration: 35
+difficulty: beginner
+order: 1
+objectives:
+  - Create a table object with fields and keys
+  - Apply DataClassification for GDPR compliance
+  - Use TableRelation for lookups
+  - Implement table triggers for business logic
+tags:
+  - tables
+  - AL
+  - data model
+---
+
+## Tables: The Foundation
+
+In Business Central, **tables** store all application data. Every page, report, and codeunit ultimately reads from or writes to tables.
+
+When you create an extension, tables are usually the first objects you define.
+
+## Basic Table Structure
+
+```al title="ItemCategory.Table.al"
+table 50110 "Item Category Extension"
+{
+    Caption = 'Item Category Extension';
+    DataClassification = CustomerContent;
+    LookupPageId = "Item Categories";
+    DrillDownPageId = "Item Categories";
+
+    fields
+    {
+        field(1; "Code"; Code[20])
+        {
+            Caption = 'Code';
+            NotBlank = true;
+        }
+        field(2; Description; Text[100])
+        {
+            Caption = 'Description';
+        }
+        field(3; "Parent Category"; Code[20])
+        {
+            Caption = 'Parent Category';
+            TableRelation = "Item Category Extension";
+        }
+        field(4; "Sort Order"; Integer)
+        {
+            Caption = 'Sort Order';
+        }
+    }
+
+    keys
+    {
+        key(PK; Code)
+        {
+            Clustered = true;
+        }
+        key(Sort; "Sort Order", Code)
+        {
+        }
+    }
+}
+```
+
+## Field Properties
+
+Common field properties you'll use daily:
+
+| Property | Purpose |
+|----------|---------|
+| `Caption` | Display label (supports translations) |
+| `NotBlank` | Required field validation |
+| `TableRelation` | Lookup link to another table |
+| `Editable` | Whether user can modify |
+| `InitValue` | Default value on insert |
+| `MinValue` / `MaxValue` | Range validation |
+| `DecimalPlaces` | Format for decimal fields |
+
+## Data Classification
+
+Every field **must** have a `DataClassification` for GDPR compliance:
+
+```al
+field(10; "Customer Email"; Text[80])
+{
+    Caption = 'Customer Email';
+    DataClassification = EndUserIdentifiableInformation;
+}
+```
+
+| Classification | When to Use |
+|---------------|-------------|
+| `CustomerContent` | General business data |
+| `EndUserIdentifiableInformation` | Names, emails, phone numbers |
+| `AccountData` | Login credentials |
+| `OrganizationIdentifiableInformation` | Company registration data |
+| `SystemMetadata` | System-generated IDs |
+
+<Callout type="warning" title="Mandatory Since BC 14">
+Fields without DataClassification will cause compilation warnings (and errors with CodeCop enabled).
+</Callout>
+
+## Table Triggers
+
+```al
+trigger OnInsert()
+begin
+    TestField("Customer No.");
+    "Created Date" := Today;
+end;
+
+trigger OnModify()
+begin
+    "Modified Date" := Today;
+end;
+
+trigger OnDelete()
+begin
+    if HasRelatedRecords() then
+        Error('Cannot delete — related records exist.');
+end;
+
+trigger OnRename()
+begin
+    // Runs when primary key changes
+end;
+```
+
+## Field Triggers
+
+Individual fields can have validation triggers:
+
+```al
+field(5; "Bonus Percent"; Decimal)
+{
+    trigger OnValidate()
+    begin
+        if ("Bonus Percent" < 0) or ("Bonus Percent" > 100) then
+            Error('Bonus percent must be between 0 and 100.');
+    end;
+}
+```
+
+## Next Steps
+
+Learn how to extend existing Microsoft tables without modifying the base application.

@@ -1,0 +1,140 @@
+---
+title: FlowFields and CalcFields
+description: Master FlowFields for computed values and CalcFields for efficient data aggregation in AL.
+duration: 35
+difficulty: intermediate
+order: 3
+objectives:
+  - Create FlowField columns with Sum, Count, and Lookup methods
+  - Use CalcFields to compute FlowField values in code
+  - Understand FlowFilter fields for dynamic filtering
+  - Apply FlowFields in pages and reports
+tags:
+  - FlowField
+  - CalcFields
+  - AL
+  - performance
+---
+
+## What are FlowFields?
+
+A **FlowField** is a virtual field that calculates its value from data in other tables. FlowFields are not stored in the database — they're computed on demand.
+
+Common uses:
+- Display total sales for a customer
+- Count open orders
+- Show inventory levels
+- Lookup related descriptions
+
+## Creating a FlowField
+
+```al title="CustomerBalance.Table.al"
+table 50120 "Customer Balance Info"
+{
+    fields
+    {
+        field(1; "Customer No."; Code[20])
+        {
+            TableRelation = Customer;
+        }
+        field(2; "Balance (LCY)"; Decimal)
+        {
+            FieldClass = FlowField;
+            CalcFormula = sum("Detailed Cust. Ledg. Entry"."Amount (LCY)"
+                where("Customer No." = field("Customer No.")));
+            Editable = false;
+        }
+        field(3; "No. of Orders"; Integer)
+        {
+            FieldClass = FlowField;
+            CalcFormula = count("Sales Header"
+                where("Sell-to Customer No." = field("Customer No."),
+                      "Document Type" = const(Order)));
+            Editable = false;
+        }
+    }
+}
+```
+
+## CalcFormula Methods
+
+| Method | Purpose | Example |
+|--------|---------|---------|
+| `sum` | Total of a field | Total sales amount |
+| `count` | Count of records | Number of open orders |
+| `average` | Average value | Average order value |
+| `min` | Minimum value | Earliest order date |
+| `max` | Maximum value | Latest shipment date |
+| `lookup` | Single field value | Item description |
+| `exist` | Boolean check | Has open invoices? |
+
+## Using CalcFields
+
+FlowFields must be calculated before reading their value:
+
+```al title="CalcFieldsExample.Codeunit.al"
+procedure ShowCustomerBalance(CustomerNo: Code[20])
+var
+    CustBalance: Record "Customer Balance Info";
+    Balance: Decimal;
+begin
+    CustBalance.Get(CustomerNo);
+    CustBalance.CalcFields("Balance (LCY)", "No. of Orders");
+
+    Balance := CustBalance."Balance (LCY)";
+    Message('Customer %1 has balance %2 with %3 open orders.',
+        CustomerNo, Balance, CustBalance."No. of Orders");
+end;
+```
+
+<Callout type="warning" title="Performance">
+CalcFields executes a SQL query. Avoid calling it inside loops — calculate once and cache the result.
+</Callout>
+
+## FlowFilters
+
+**FlowFilter** fields provide dynamic filtering for FlowFields:
+
+```al
+field(10; "Date Filter"; Date)
+{
+    FieldClass = FlowFilter;
+}
+field(11; "Amount This Period"; Decimal)
+{
+    FieldClass = FlowField;
+    CalcFormula = sum("Detailed Cust. Ledg. Entry"."Amount (LCY)"
+        where("Customer No." = field("Customer No."),
+              "Posting Date" = field("Date Filter")));
+}
+```
+
+Set filters in code before calculating:
+
+```al
+Rec.SetRange("Date Filter", CalcDate('<-CM>', Today), Today);
+Rec.CalcFields("Amount This Period");
+```
+
+## FlowFields on Pages
+
+FlowFields display automatically on pages — no special handling needed:
+
+```al
+field("Balance (LCY)"; Rec."Balance (LCY)")
+{
+    ApplicationArea = All;
+    ToolTip = 'Shows the calculated customer balance.';
+    DrillDownPageId = "Customer Ledger Entries";
+}
+```
+
+The **DrillDownPageId** property lets users click the FlowField to see underlying records.
+
+<Callout type="tip" title="Microsoft Pattern">
+Study how Microsoft uses FlowFields in standard tables like Customer, Vendor, and Item. The patterns are consistent and battle-tested.
+</Callout>
+
+## Congratulations!
+
+You've completed the AL Development Fundamentals course. You now have the foundation to build real Business Central extensions. Continue with our Pages & UI course to learn how to create beautiful user interfaces.

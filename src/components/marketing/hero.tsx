@@ -18,22 +18,19 @@ export function Hero() {
           transition={{ duration: 0.6 }}
           className="mx-auto max-w-3xl text-center"
         >
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-brand/30 bg-brand/10 px-4 py-1.5 text-sm text-brand">
-            <Sparkles className="h-4 w-4" />
-            Premium BC Development Training
-          </div>
 
           <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
-            Master{" "}
-            <span className="text-gradient">Business Central</span>
-            <br />
-            Development
+            Learn{" "}
+            <span className="text-gradient">
+              Microsoft Dynamics 365 Business Central
+            </span>
           </h1>
 
           <p className="mt-6 text-lg leading-relaxed text-muted-foreground sm:text-xl">
-            Learn AL development, extensions, and ERP customization from industry
-            experts. Build real-world skills with hands-on projects and structured
-            learning paths.
+            Everything you need to master Business Central—from AL development and
+            functional consulting to integrations, reporting, APIs, and real-world
+            projects. Learn at your own pace with practical courses, source code,
+            quizzes, and expert guidance.
           </p>
 
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">

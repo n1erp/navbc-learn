@@ -6,14 +6,17 @@ import { cn } from "@/lib/utils";
 export const mdxComponents: MDXComponents = {
   h1: ({ className, ...props }) => (
     <h1
-      className={cn("mt-8 scroll-m-20 text-3xl font-bold tracking-tight first:mt-0", className)}
+      className={cn(
+        "mt-10 scroll-m-20 text-2xl font-bold tracking-tight first:mt-0 sm:text-3xl md:text-4xl",
+        className,
+      )}
       {...props}
     />
   ),
   h2: ({ className, ...props }) => (
     <h2
       className={cn(
-        "mt-10 scroll-m-20 border-b border-border pb-2 text-2xl font-semibold tracking-tight first:mt-0",
+        "mt-10 scroll-m-20 border-b border-border pb-3 text-xl font-semibold tracking-tight first:mt-0 sm:text-2xl md:text-3xl",
         className,
       )}
       {...props}
@@ -21,34 +24,49 @@ export const mdxComponents: MDXComponents = {
   ),
   h3: ({ className, ...props }) => (
     <h3
-      className={cn("mt-8 scroll-m-20 text-xl font-semibold tracking-tight", className)}
+      className={cn(
+        "mt-8 scroll-m-20 text-lg font-semibold tracking-tight sm:text-xl md:text-2xl",
+        className,
+      )}
       {...props}
     />
   ),
   h4: ({ className, ...props }) => (
     <h4
-      className={cn("mt-6 scroll-m-20 text-lg font-semibold tracking-tight", className)}
+      className={cn("mt-6 scroll-m-20 text-base font-semibold tracking-tight sm:text-lg", className)}
       {...props}
     />
   ),
   p: ({ className, ...props }) => (
     <p
-      className={cn("leading-7 text-muted-foreground [&:not(:first-child)]:mt-4", className)}
+      className={cn(
+        "leading-[1.8] text-foreground/85 [&:not(:first-child)]:mt-5",
+        className,
+      )}
       {...props}
     />
   ),
   ul: ({ className, ...props }) => (
-    <ul className={cn("my-4 ml-6 list-disc space-y-2 text-muted-foreground", className)} {...props} />
+    <ul
+      className={cn("my-5 ml-5 list-disc space-y-2.5 text-foreground/85 sm:ml-6", className)}
+      {...props}
+    />
   ),
   ol: ({ className, ...props }) => (
-    <ol className={cn("my-4 ml-6 list-decimal space-y-2 text-muted-foreground", className)} {...props} />
+    <ol
+      className={cn("my-5 ml-5 list-decimal space-y-2.5 text-foreground/85 sm:ml-6", className)}
+      {...props}
+    />
   ),
   li: ({ className, ...props }) => (
-    <li className={cn("leading-7", className)} {...props} />
+    <li className={cn("leading-[1.75] pl-1", className)} {...props} />
   ),
   blockquote: ({ className, ...props }) => (
     <blockquote
-      className={cn("mt-4 border-l-4 border-brand pl-4 italic text-muted-foreground", className)}
+      className={cn(
+        "mt-5 border-l-4 border-brand pl-5 text-base italic text-foreground/75 sm:text-lg",
+        className,
+      )}
       {...props}
     />
   ),
@@ -76,37 +94,40 @@ export const mdxComponents: MDXComponents = {
   code: ({ className, ...props }) => (
     <code
       className={cn(
-        "relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm text-foreground",
+        "relative rounded-md bg-muted px-1.5 py-0.5 font-mono text-[0.875em] font-medium text-foreground",
         className,
       )}
       {...props}
     />
   ),
   pre: ({ className, ...props }) => (
-    <pre
-      className={cn("my-6 overflow-x-auto rounded-xl", className)}
-      {...props}
-    />
+    <pre className={cn("my-0 overflow-x-auto rounded-xl", className)} {...props} />
   ),
-  hr: () => <hr className="my-8 border-border" />,
+  hr: () => <hr className="my-10 border-border" />,
   table: ({ className, ...props }) => (
-    <div className="my-6 w-full overflow-x-auto">
-      <table className={cn("w-full border-collapse text-sm", className)} {...props} />
+    <div className="my-6 w-full overflow-x-auto rounded-xl border border-border">
+      <table className={cn("w-full min-w-[480px] border-collapse text-sm sm:text-base", className)} {...props} />
     </div>
   ),
   th: ({ className, ...props }) => (
     <th
-      className={cn("border border-border bg-muted px-4 py-2 text-left font-semibold", className)}
+      className={cn(
+        "border-b border-border bg-muted px-4 py-3 text-left text-sm font-semibold sm:px-5 sm:text-base",
+        className,
+      )}
       {...props}
     />
   ),
   td: ({ className, ...props }) => (
-    <td className={cn("border border-border px-4 py-2", className)} {...props} />
+    <td
+      className={cn("border-b border-border px-4 py-3 text-sm sm:px-5 sm:text-base", className)}
+      {...props}
+    />
   ),
   img: ({ className, alt, ...props }) => (
     // eslint-disable-next-line @next/next/no-img-element
     <img
-      className={cn("my-6 rounded-xl border border-border", className)}
+      className={cn("my-8 w-full rounded-xl border border-border", className)}
       alt={alt ?? ""}
       loading="lazy"
       {...props}

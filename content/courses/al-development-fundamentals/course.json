@@ -11,7 +11,7 @@
   "featured": true,
   "published": true,
   "tags": ["AL", "fundamentals", "beginner", "VS Code"],
-  "thumbnail": "/images/courses/al-fundamentals.jpg",
+  "thumbnail": "/images/courses/al-fundamentals.svg",
   "instructor": {
     "name": "NAVBC Team",
     "role": "BC Consultants & Developers"

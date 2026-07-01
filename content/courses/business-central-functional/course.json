@@ -11,7 +11,7 @@
   "featured": true,
   "published": true,
   "tags": ["functional", "MB-800", "finance", "sales", "manufacturing", "consultant"],
-  "thumbnail": "/images/courses/bc-functional.jpg",
+  "thumbnail": "/images/courses/bc-functional.svg",
   "instructor": {
     "name": "NAVBC Team",
     "role": "BC Functional Consultants"

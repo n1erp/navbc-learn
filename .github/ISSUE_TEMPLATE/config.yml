@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: GitHub Discussions
+    url: https://github.com/taher-el-mehdi/navbc-learn/discussions
+    about: Ask questions, propose ideas, and connect with the community
+  - name: Contribution Guide
+    url: https://github.com/taher-el-mehdi/navbc-learn/blob/main/CONTRIBUTING.md
+    about: Read how to contribute lessons, fixes, and improvements

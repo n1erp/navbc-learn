@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" fill="none">
+  <defs>
+    <linearGradient id="bg4" x1="1200" y1="0" x2="0" y2="675" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1c0a00"/>
+      <stop offset="0.4" stop-color="#431407"/>
+      <stop offset="1" stop-color="#7c2d12"/>
+    </linearGradient>
+    <linearGradient id="accent4" x1="0" y1="0" x2="1" y2="0">
+      <stop stop-color="#fb923c"/>
+      <stop offset="1" stop-color="#f97316"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bg4)"/>
+  <circle cx="150" cy="150" r="100" fill="#fb923c" fill-opacity="0.1"/>
+  <path d="M750 150 L1100 150 L925 400 Z" fill="url(#accent4)" fill-opacity="0.15" stroke="#fb923c" stroke-opacity="0.3" stroke-width="2"/>
+  <text x="80" y="280" fill="white" font-family="system-ui,sans-serif" font-size="28" font-weight="600" opacity="0.7">NAVBC Learn</text>
+  <text x="80" y="360" fill="white" font-family="system-ui,sans-serif" font-size="56" font-weight="700">AL Development</text>
+  <text x="80" y="430" fill="white" font-family="system-ui,sans-serif" font-size="56" font-weight="700">Advanced</text>
+  <text x="80" y="510" fill="#fdba74" font-family="system-ui,sans-serif" font-size="24">Events · Integration · Reports · Patterns</text>
+  <rect x="80" y="560" width="180" height="36" rx="18" fill="#fb923c" fill-opacity="0.15" stroke="#fb923c" stroke-width="1"/>
+  <text x="170" y="583" fill="#fdba74" font-family="monospace" font-size="16" text-anchor="middle" font-weight="600">INTERMEDIATE</text>
+  <text x="900" y="520" fill="#fb923c" font-family="monospace" font-size="64" font-weight="700" opacity="0.85">[Event]</text>
+</svg>

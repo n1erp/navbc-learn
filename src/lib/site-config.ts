@@ -20,14 +20,20 @@ export const siteConfig = {
     url: "https://navbc.com",
   },
   links: {
-    github: "https://github.com/navbc",
+    github: "https://github.com/taher-el-mehdi/navbc-learn",
     twitter: "https://twitter.com/navbc",
     discord: "https://discord.gg/navbc",
+  },
+  github: {
+    repo: "taher-el-mehdi/navbc-learn",
+    branch: "main",
+    discussionsEnabled: true,
   },
   nav: [
     { title: "Courses", href: "/courses" },
     { title: "Learning Paths", href: "/learning-paths" },
     { title: "Projects", href: "/projects" },
     { title: "Tutorials", href: "/tutorials" },
+    { title: "Contribute", href: "/contribute" },
   ],
 } as const;

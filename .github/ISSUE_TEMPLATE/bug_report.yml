@@ -1,0 +1,75 @@
+name: Bug Report
+description: Report a bug in the NAVBC Learn website or platform
+title: "[Bug]: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug! Please fill in the details below.
+
+  - type: input
+    id: page
+    attributes:
+      label: Page URL
+      description: Where did you encounter the bug?
+      placeholder: e.g. /courses/al-development-fundamentals/lessons/introduction-to-al
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Website / UI
+        - Lesson content
+        - Search
+        - Mobile layout
+        - Dark mode
+        - Build / deployment
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: Describe the bug clearly
+      placeholder: Tell us what you expected vs what actually happened
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Go to '...'
+        2. Click on '...'
+        3. See error
+    validations:
+      required: true
+
+  - type: dropdown
+    id: browser
+    attributes:
+      label: Browser / device
+      options:
+        - Chrome (desktop)
+        - Firefox (desktop)
+        - Safari (desktop)
+        - Edge (desktop)
+        - Chrome (mobile)
+        - Safari (iOS)
+        - Other
+    validations:
+      required: false
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots
+      description: Drag and drop screenshots here or paste links
+      placeholder: Optional but very helpful

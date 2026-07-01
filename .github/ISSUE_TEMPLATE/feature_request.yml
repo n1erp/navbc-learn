@@ -1,0 +1,48 @@
+name: Feature Request
+description: Suggest a new feature for the NAVBC Learn platform
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Have an idea to make NAVBC Learn better? We'd love to hear it.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or opportunity
+      description: What problem does this solve for learners or contributors?
+      placeholder: I'm frustrated when... / Learners would benefit from...
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed solution
+      description: How would you solve it?
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Any other approaches you thought about?
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Course content
+        - Search
+        - User accounts / progress
+        - Quizzes
+        - Mobile experience
+        - SEO
+        - Developer tooling
+        - Other
+    validations:
+      required: true

@@ -12,6 +12,7 @@ import { CourseSidebar, LessonNavigation } from "@/components/courses/course-sid
 import { LessonMeta } from "@/components/lessons/lesson-meta";
 import { VideoPlayer } from "@/components/lessons/video-player";
 import { DownloadsPanel } from "@/components/lessons/download-button";
+import { LessonContent } from "@/components/mdx/code-block-enhancer";
 
 interface PageProps {
   params: Promise<{ slug: string; lessonSlug: string }>;
@@ -80,11 +81,11 @@ export default async function LessonPage({ params }: PageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <div className="flex min-h-[calc(100vh-4rem)]">
+      <div className="flex min-h-[calc(100vh-4rem)] flex-col lg:flex-row">
         <CourseSidebar course={course} currentLessonSlug={lessonSlug} />
 
-        <article className="flex-1">
-          <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6 lg:px-8">
+        <article className="min-w-0 flex-1">
+          <div className="mx-auto max-w-3xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8 lg:py-10">
             <Breadcrumb
               items={[
                 { label: "Courses", href: "/courses" },
@@ -94,11 +95,13 @@ export default async function LessonPage({ params }: PageProps) {
               ]}
             />
 
-            <header className="mt-6">
-              <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
+            <header className="mt-4 sm:mt-6">
+              <h1 className="text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl lg:text-[2.5rem] lg:leading-tight">
                 {lesson.title}
               </h1>
-              <p className="mt-3 text-lg text-muted-foreground">{lesson.description}</p>
+              <p className="mt-3 text-base leading-relaxed text-muted-foreground sm:text-lg md:text-xl">
+                {lesson.description}
+              </p>
             </header>
 
             <div className="mt-8">
@@ -113,7 +116,7 @@ export default async function LessonPage({ params }: PageProps) {
               <VideoPlayer url={lesson.video.url} title={lesson.title} />
             )}
 
-            <div className="prose-lesson mt-10">{content}</div>
+            <LessonContent>{content}</LessonContent>
 
             <DownloadsPanel downloads={lesson.downloads} />
 

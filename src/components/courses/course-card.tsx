@@ -35,7 +35,7 @@ export function CourseCard({ course, featured }: CourseCardProps) {
             <BookOpen className="h-12 w-12 text-brand/40" />
           </div>
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-card/90 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-card via-card/20 to-transparent" />
         <span
           className={cn(
             "absolute right-3 top-3 rounded-full border px-2.5 py-0.5 text-xs font-medium",
@@ -46,11 +46,11 @@ export function CourseCard({ course, featured }: CourseCardProps) {
         </span>
       </div>
 
-      <CardHeader className="pb-3">
-        <h3 className="line-clamp-2 text-lg font-semibold leading-snug group-hover:text-brand">
+      <CardHeader className="pb-3 pt-4 sm:pt-5">
+        <h3 className="line-clamp-2 text-base font-semibold leading-snug sm:text-lg group-hover:text-brand">
           <Link href={`/courses/${course.slug}`}>{course.title}</Link>
         </h3>
-        <p className="line-clamp-2 text-sm text-muted-foreground">
+        <p className="line-clamp-2 text-sm leading-relaxed text-muted-foreground sm:text-base">
           {course.shortDescription}
         </p>
       </CardHeader>

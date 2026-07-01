@@ -9,6 +9,13 @@ const footerLinks = {
     { title: "Learning Paths", href: "/learning-paths" },
     { title: "Projects", href: "/projects" },
     { title: "Tutorials", href: "/tutorials" },
+    { title: "Contribute", href: "/contribute" },
+  ],
+  openSource: [
+    { title: "GitHub Repository", href: "https://github.com/taher-el-mehdi/navbc-learn" },
+    { title: "Report an Issue", href: "https://github.com/taher-el-mehdi/navbc-learn/issues/new/choose" },
+    { title: "Discussions", href: "https://github.com/taher-el-mehdi/navbc-learn/discussions" },
+    { title: "Contributing Guide", href: "/contribute" },
   ],
   resources: [
     { title: "AL Documentation", href: "https://learn.microsoft.com/dynamics365/business-central/dev-itpro/developer/devenv-programming-in-al" },
@@ -37,9 +44,17 @@ export function SiteFooter() {
               <span className="font-semibold tracking-tight">NAVBC Learn</span>
             </Link>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
-              The premium learning platform for Microsoft Dynamics 365 Business
-              Central and NAV developers. Master AL development from fundamentals
-              to advanced extensions.
+              Open source learning platform for Microsoft Dynamics 365 Business
+              Central developers. Contributions welcome on{" "}
+              <a
+                href={siteConfig.links.github}
+                className="font-medium text-brand hover:underline"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                GitHub
+              </a>
+              .
             </p>
             <div className="mt-6 flex gap-3">
               <a
@@ -83,7 +98,15 @@ export function SiteFooter() {
 
         <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} NAVBC. All rights reserved.
+            © {new Date().getFullYear()} NAVBC Learn Contributors ·{" "}
+            <a
+              href="https://github.com/taher-el-mehdi/navbc-learn/blob/main/LICENSE"
+              className="hover:text-brand"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              MIT License
+            </a>
           </p>
           <p className="text-sm text-muted-foreground">
             Built for Business Central developers worldwide.

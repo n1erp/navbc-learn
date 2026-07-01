@@ -1,0 +1,63 @@
+name: Content Improvement
+description: Suggest improvements to a lesson, course, or educational content
+title: "[Content]: "
+labels: ["content", "good first issue"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Help us improve Business Central learning content! Typos, clearer explanations, new examples, and missing topics are all welcome.
+
+  - type: input
+    id: page
+    attributes:
+      label: Page URL
+      description: Which lesson or page needs improvement?
+      placeholder: e.g. /courses/business-central-functional/lessons/licensing-and-modules
+    validations:
+      required: true
+
+  - type: input
+    id: course
+    attributes:
+      label: Course (if applicable)
+      placeholder: e.g. AL Development Fundamentals
+
+  - type: input
+    id: lesson
+    attributes:
+      label: Lesson title (if applicable)
+      placeholder: e.g. Docker Setup for Business Central
+
+  - type: dropdown
+    id: type
+    attributes:
+      label: Type of improvement
+      options:
+        - Typo or grammar fix
+        - Clarify explanation
+        - Add code example
+        - Add screenshot or diagram
+        - Factual correction
+        - New lesson topic suggestion
+        - Translation
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the improvement
+      description: What should change and why?
+      placeholder: Be as specific as possible. Include suggested text if you have it.
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: contribute
+    attributes:
+      label: Would you like to contribute a fix?
+      options:
+        - label: I plan to open a Pull Request with this fix
+        - label: I need help getting started — please guide me

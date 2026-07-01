@@ -1,109 +1,43 @@
 # NAVBC Learn
 
-Premium learning platform for Microsoft Dynamics 365 Business Central and NAV developers.
+[![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
-**Live URL:** [learn.navbc.com](https://learn.navbc.com)
+Open source learning platform for **Microsoft Dynamics 365 Business Central** developers.
 
-## Tech Stack
+**Live:** [learn.navbc.com](https://learn.navbc.com) · **Contribute:** [/contribute](https://learn.navbc.com/contribute) · **GitHub:** [taher-el-mehdi/navbc-learn](https://github.com/taher-el-mehdi/navbc-learn)
 
-- **Next.js 15** (App Router) with TypeScript
-- **Tailwind CSS 4** + shadcn/ui components
-- **MDX/Markdown** content-driven lessons
-- **Framer Motion** for subtle animations
-- **Shiki** syntax highlighting (AL, SQL, PowerShell, C#, etc.)
-- **next-themes** dark mode
-
-## Getting Started
+## Quick start
 
 ```bash
+git clone https://github.com/taher-el-mehdi/navbc-learn.git
+cd navbc-learn
 npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000)
+## Contribute
 
-## Adding Content
+- Fix or add lessons in `content/` (MDX — no React needed)
+- [Report issues](https://github.com/taher-el-mehdi/navbc-learn/issues/new/choose)
+- [Join discussions](https://github.com/taher-el-mehdi/navbc-learn/discussions)
+- Read **[CONTRIBUTING.md](./CONTRIBUTING.md)**
 
-### New Course
+Every page includes a contribute bar at the bottom with GitHub links.
 
-1. Create folder: `content/courses/my-course/course.json`
-2. Add modules as subfolders with lesson `.mdx` files
-3. No React code changes needed — pages are auto-generated
-
-### New Lesson
-
-Create `content/courses/{courseId}/{moduleId}/lesson-slug.mdx`:
-
-```mdx
----
-title: My Lesson
-description: Short description for SEO
-duration: 20
-difficulty: beginner
-objectives:
-  - First learning objective
-  - Second learning objective
----
-
-## Content here
-
-<Callout type="tip">Pro tip content</Callout>
-
-\`\`\`al title="Example.al"
-table 50100 "My Table" { }
-\`\`\`
-```
-
-### Downloads
-
-Place files in `content/courses/{courseId}/{moduleId}/{lessonSlug}/downloads/` — download buttons appear automatically.
-
-### Projects & Learning Paths
-
-- Projects: `content/projects/{id}/project.json`
-- Learning paths: `content/learning-paths/paths.json`
-
-## Project Structure
+## Project structure
 
 ```
-content/           # All course content (MDX + JSON)
-src/
-  app/             # Next.js pages & API routes
-  components/      # Reusable UI components
-  lib/             # Content loaders, MDX, SEO utilities
-  types/           # TypeScript content schemas
-legacy/            # Original HTML site (reference only)
+content/           # Courses & lessons (main contribution area)
+src/               # Next.js platform code
+docs/              # Contributor docs
+.github/           # Issue & PR templates
 ```
 
-See [ARCHITECTURE.md](./ARCHITECTURE.md) for detailed architectural decisions.
+## Tech stack
 
-## Scripts
-
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Start development server |
-| `npm run build` | Production build |
-| `npm run start` | Start production server |
-| `npm run lint` | Run ESLint |
-| `npm run format` | Format with Prettier |
-
-## SEO
-
-- Static generation for all course/lesson pages
-- Open Graph + Twitter Cards
-- JSON-LD structured data (Course, LearningResource, WebSite)
-- Auto-generated `sitemap.xml` and `robots.txt`
-
-## Future Features
-
-Architecture supports adding without major refactoring:
-
-- User accounts & progress tracking
-- Meilisearch integration (search API ready)
-- Quizzes, certificates, subscriptions
-- Comments, ratings, AI assistant
-- Admin dashboard
+Next.js 15 · TypeScript · Tailwind CSS · MDX · Shiki
 
 ## License
 
-Proprietary — NAVBC
+[MIT License](./LICENSE)

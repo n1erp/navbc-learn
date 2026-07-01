@@ -1,0 +1,24 @@
+name: Question
+description: Ask a question about contributing or the project
+title: "[Question]: "
+labels: ["question"]
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: Your question
+      description: Ask anything about contributing, content structure, or development setup
+    validations:
+      required: true
+
+  - type: dropdown
+    id: topic
+    attributes:
+      label: Topic
+      options:
+        - Contributing content (MDX lessons)
+        - Local development setup
+        - Pull Request process
+        - Course structure
+        - Platform / code
+        - Other

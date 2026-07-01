@@ -88,3 +88,34 @@ Lesson page:
 - `optimizePackageImports` for lucide-react and framer-motion
 - Image optimization via `next/image`
 - Minimal client JS on content pages (sidebar, search, theme only)
+
+## Open Source & Contributions
+
+### Contribution flow
+
+```
+Contributor → Fork → Branch → Edit content/ or src/ → PR → Review → Merge → Deploy
+```
+
+### Key files for contributors
+
+| File | Purpose |
+|------|---------|
+| `CONTRIBUTING.md` | Main contribution guide |
+| `docs/content-guidelines.md` | Lesson writing standards |
+| `.github/ISSUE_TEMPLATE/` | Bug, content, feature issue forms |
+| `src/components/layout/contribute-bar.tsx` | On-page GitHub links (all pages) |
+| `src/app/api/contribute-meta/route.ts` | Maps URLs to editable content files |
+| `src/lib/github.ts` | GitHub URL helpers |
+
+### Content vs platform changes
+
+- **Content PRs** — Only touch `content/` and `public/images/`. No TypeScript required.
+- **Platform PRs** — Touch `src/`. Require `npm run build` and `npm run lint`.
+
+### GitHub integration
+
+- Issues: bug reports, content improvements, feature requests
+- Discussions: ideas, questions, show-and-tell
+- Edit links: lesson/course pages link directly to the source file on GitHub
+

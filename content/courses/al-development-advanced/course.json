@@ -11,7 +11,7 @@
   "featured": true,
   "published": true,
   "tags": ["AL", "MB-820", "events", "integration", "reports", "advanced"],
-  "thumbnail": "/images/courses/al-advanced.jpg",
+  "thumbnail": "/images/courses/al-advanced.svg",
   "instructor": {
     "name": "NAVBC Team",
     "role": "BC Developers & Architects"

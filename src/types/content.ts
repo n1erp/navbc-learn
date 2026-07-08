@@ -6,6 +6,8 @@ export const difficultySchema = z.enum([
   "advanced",
 ]);
 
+export const trackSchema = z.enum(["technical", "functional"]);
+
 export const lessonFrontmatterSchema = z.object({
   title: z.string(),
   description: z.string(),
@@ -37,6 +39,7 @@ export const courseSchema = z.object({
   description: z.string(),
   shortDescription: z.string(),
   slug: z.string(),
+  track: trackSchema,
   level: difficultySchema,
   duration: z.number(),
   lessonsCount: z.number(),
@@ -72,6 +75,8 @@ export const learningPathSchema = z.object({
   title: z.string(),
   description: z.string(),
   slug: z.string(),
+  track: trackSchema.optional(),
+  thumbnail: z.string().optional(),
   courses: z.array(z.string()),
   duration: z.number(),
   level: difficultySchema,
@@ -90,6 +95,7 @@ export const tutorialSchema = z.object({
 });
 
 export type Difficulty = z.infer<typeof difficultySchema>;
+export type Track = z.infer<typeof trackSchema>;
 export type LessonFrontmatter = z.infer<typeof lessonFrontmatterSchema>;
 export type Module = z.infer<typeof moduleSchema>;
 export type Course = z.infer<typeof courseSchema>;

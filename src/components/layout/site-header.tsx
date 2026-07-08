@@ -8,7 +8,6 @@ import { siteConfig } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
-import { SearchBar } from "@/components/search/search-bar";
 
 export function SiteHeader() {
   const pathname = usePathname();
@@ -45,14 +44,8 @@ export function SiteHeader() {
           </nav>
         </div>
 
-        <div className="flex flex-1 items-center justify-end gap-2 sm:gap-3">
-          <div className="hidden max-w-sm flex-1 sm:block">
-            <SearchBar />
-          </div>
+        <div className="flex items-center gap-2">
           <ThemeToggle />
-          <Button variant="brand" size="sm" className="hidden sm:inline-flex" asChild>
-            <Link href="/courses">Start Learning</Link>
-          </Button>
           <Button
             variant="ghost"
             size="icon"
@@ -68,9 +61,6 @@ export function SiteHeader() {
 
       {mobileOpen && (
         <div className="border-t border-border px-4 py-4 md:hidden">
-          <div className="mb-4">
-            <SearchBar />
-          </div>
           <nav className="flex flex-col gap-1" aria-label="Mobile navigation">
             {siteConfig.nav.map((item) => (
               <Link
@@ -82,11 +72,6 @@ export function SiteHeader() {
                 {item.title}
               </Link>
             ))}
-            <Button variant="brand" className="mt-2" asChild>
-              <Link href="/courses" onClick={() => setMobileOpen(false)}>
-                Start Learning
-              </Link>
-            </Button>
           </nav>
         </div>
       )}

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" fill="none">
+  <defs>
+    <linearGradient id="t-bg" x1="0" y1="0" x2="1200" y2="675" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0f172a"/>
+      <stop offset="0.5" stop-color="#1e3a5f"/>
+      <stop offset="1" stop-color="#0c4a6e"/>
+    </linearGradient>
+    <pattern id="t-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" stroke-opacity="0.04" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="675" fill="url(#t-bg)"/>
+  <rect width="1200" height="675" fill="url(#t-grid)"/>
+  <circle cx="950" cy="120" r="200" fill="#38bdf8" fill-opacity="0.1"/>
+  <rect x="72" y="72" width="120" height="32" rx="16" fill="#38bdf8" fill-opacity="0.15" stroke="#38bdf8" stroke-opacity="0.4"/>
+  <text x="132" y="93" fill="#38bdf8" font-family="system-ui,sans-serif" font-size="14" text-anchor="middle" font-weight="600">TECHNICAL</text>
+  <text x="80" y="320" fill="white" font-family="system-ui,sans-serif" font-size="72" font-weight="700">Fundamentals</text>
+  <text x="80" y="400" fill="#94a3b8" font-family="system-ui,sans-serif" font-size="26">Complete AL &amp; BC development path</text>
+  <text x="900" y="520" fill="#38bdf8" font-family="monospace" font-size="80" font-weight="700" opacity="0.85">&lt;/&gt;</text>
+</svg>

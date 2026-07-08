@@ -14,9 +14,9 @@ export function FeaturedCourses({ courses }: FeaturedCoursesProps) {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex items-end justify-between gap-4">
           <div>
-            <h2 className="text-3xl font-bold tracking-tight">Featured Courses</h2>
+            <h2 className="text-3xl font-bold tracking-tight">Courses</h2>
             <p className="mt-2 text-muted-foreground">
-              Start your Business Central development journey
+              One Fundamentals course per path — Technical or Functional
             </p>
           </div>
           <Button variant="ghost" asChild className="hidden sm:inline-flex">
@@ -27,7 +27,7 @@ export function FeaturedCourses({ courses }: FeaturedCoursesProps) {
           </Button>
         </div>
 
-        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 grid gap-6 sm:grid-cols-2">
           {courses.map((course) => (
             <CourseCard key={course.id} course={course} featured />
           ))}

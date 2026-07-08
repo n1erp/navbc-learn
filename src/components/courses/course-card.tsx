@@ -1,11 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Clock, BookOpen, ArrowRight } from "lucide-react";
+import { Clock, BookOpen, ArrowRight, Code2, Briefcase } from "lucide-react";
 import type { Course } from "@/types/content";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { formatDuration } from "@/lib/utils";
 import { difficultyLabels, difficultyColors } from "@/lib/seo";
+import { trackColors, trackLabels } from "@/lib/track-styles";
 import { cn } from "@/lib/utils";
 
 interface CourseCardProps {
@@ -13,15 +14,34 @@ interface CourseCardProps {
   featured?: boolean;
 }
 
+const trackIcons = {
+  technical: Code2,
+  functional: Briefcase,
+} as const;
+
 export function CourseCard({ course, featured }: CourseCardProps) {
+  const TrackIcon = trackIcons[course.track];
+  const trackBorder =
+    course.track === "functional"
+      ? "hover:border-emerald-500/40 hover:shadow-emerald-500/5"
+      : "hover:border-sky-500/40 hover:shadow-sky-500/5";
+
   return (
     <Card
       className={cn(
-        "group relative overflow-hidden transition-all hover:border-brand/40 hover:shadow-lg hover:shadow-brand/5",
-        featured && "border-brand/20",
+        "group relative overflow-hidden transition-all hover:shadow-lg",
+        trackBorder,
+        featured && (course.track === "functional" ? "border-emerald-500/20" : "border-sky-500/20"),
       )}
     >
-      <div className="relative aspect-[16/9] overflow-hidden bg-gradient-to-br from-brand/20 via-muted to-muted">
+      <div
+        className={cn(
+          "relative aspect-[16/9] overflow-hidden",
+          course.track === "functional"
+            ? "bg-gradient-to-br from-emerald-950/40 via-muted to-muted"
+            : "bg-gradient-to-br from-sky-950/40 via-muted to-muted",
+        )}
+      >
         {course.thumbnail ? (
           <Image
             src={course.thumbnail}
@@ -32,10 +52,19 @@ export function CourseCard({ course, featured }: CourseCardProps) {
           />
         ) : (
           <div className="flex h-full items-center justify-center">
-            <BookOpen className="h-12 w-12 text-brand/40" />
+            <TrackIcon className="h-12 w-12 opacity-40" />
           </div>
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-card via-card/20 to-transparent" />
+        <span
+          className={cn(
+            "absolute left-3 top-3 flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-xs font-medium backdrop-blur-sm",
+            trackColors[course.track],
+          )}
+        >
+          <TrackIcon className="h-3 w-3" />
+          {trackLabels[course.track]}
+        </span>
         <span
           className={cn(
             "absolute right-3 top-3 rounded-full border px-2.5 py-0.5 text-xs font-medium",

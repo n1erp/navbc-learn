@@ -5,7 +5,7 @@ import { CourseCard } from "@/components/courses/course-card";
 export const metadata: Metadata = {
   title: "Courses",
   description:
-    "Browse all Business Central and AL development courses. From fundamentals to advanced extension development.",
+    "Two Business Central learning paths — Technical (AL development) and Functional (consultant). Each path includes a complete Fundamentals course.",
   alternates: {
     canonical: "https://learn.navbc.com/courses",
   },
@@ -19,12 +19,12 @@ export default function CoursesPage() {
       <div className="max-w-2xl">
         <h1 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">Courses</h1>
         <p className="mt-4 text-base leading-relaxed text-muted-foreground sm:text-lg">
-          Comprehensive courses to master Microsoft Dynamics 365 Business Central
-          development with AL.
+          Choose the Technical or Functional Fundamentals course — each path is a
+          complete, structured learning experience.
         </p>
       </div>
 
-      <div className="mt-10 grid gap-5 sm:mt-12 sm:grid-cols-2 sm:gap-6 lg:grid-cols-2 xl:grid-cols-3">
+      <div className="mt-10 grid gap-5 sm:mt-12 sm:grid-cols-2 sm:gap-6 max-w-4xl">
         {courses.map((course) => (
           <CourseCard key={course.id} course={course} />
         ))}

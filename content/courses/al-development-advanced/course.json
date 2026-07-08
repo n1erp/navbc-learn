@@ -8,8 +8,7 @@
   "duration": 420,
   "lessonsCount": 9,
   "modulesCount": 4,
-  "featured": true,
-  "published": true,
+  "published": false,
   "tags": ["AL", "MB-820", "events", "integration", "reports", "advanced"],
   "thumbnail": "/images/courses/al-advanced.svg",
   "instructor": {

@@ -1,54 +1,90 @@
 {
   "id": "al-development-fundamentals",
-  "title": "AL Development Fundamentals",
-  "description": "Master the Application Language (AL) from scratch. Learn syntax, data types, variables, and the core building blocks of Business Central extension development. This comprehensive course takes you from zero to building your first AL objects.",
-  "shortDescription": "Learn AL programming from fundamentals to your first BC extension.",
-  "slug": "al-development-fundamentals",
+  "title": "Fundamentals",
+  "description": "The complete technical foundation for Business Central developers. Master AL from syntax and environment setup through tables, pages, reports, integration, and event-driven architecture — all in one structured course.",
+  "shortDescription": "Complete AL & BC development path — from zero to extension developer.",
+  "slug": "technical",
+  "track": "technical",
   "level": "beginner",
-  "duration": 480,
-  "lessonsCount": 8,
-  "modulesCount": 3,
+  "duration": 1260,
+  "lessonsCount": 20,
+  "modulesCount": 8,
   "featured": true,
   "published": true,
-  "tags": ["AL", "fundamentals", "beginner", "VS Code"],
-  "thumbnail": "/images/courses/al-fundamentals.svg",
+  "tags": ["AL", "technical", "developer", "fundamentals", "MB-820"],
+  "thumbnail": "/images/courses/technical-fundamentals.svg",
   "instructor": {
     "name": "NAVBC Team",
-    "role": "BC Consultants & Developers"
+    "role": "BC Developers"
   },
   "learningOutcomes": [
-    "Understand AL syntax and programming fundamentals",
-    "Set up a complete BC development environment with Docker",
-    "Create tables, pages, and codeunits in AL",
-    "Work with events, triggers, and procedures",
-    "Build and publish your first BC extension"
+    "Understand AL syntax, data types, and control structures",
+    "Set up VS Code, Docker, and publish your first extension",
+    "Create tables, pages, reports, and codeunits",
+    "Build page UIs including Card, List, and Document pages",
+    "Integrate BC with external systems via web services and APIs",
+    "Use event subscribers for upgrade-safe customization"
   ],
   "prerequisites": [
     "Basic programming knowledge (any language)",
-    "Windows 10/11 Pro or Enterprise",
-    "Familiarity with ERP concepts is helpful but not required"
+    "Windows 10/11 Pro or Enterprise"
   ],
   "modules": [
     {
       "id": "module-01-introduction",
       "title": "Introduction to AL",
-      "description": "Get started with AL programming and understand the Business Central development landscape.",
+      "description": "AL basics and the Business Central development landscape.",
       "order": 1,
       "lessons": ["introduction-to-al", "al-syntax-basics"]
     },
     {
       "id": "module-02-environment",
       "title": "Development Environment",
-      "description": "Set up Visual Studio Code, Docker, and your first BC sandbox container.",
+      "description": "VS Code, Docker, and your first BC sandbox.",
       "order": 2,
       "lessons": ["installing-vscode", "docker-setup", "creating-your-first-project"]
     },
     {
       "id": "module-03-tables",
       "title": "Working with Tables",
-      "description": "Learn to create and extend tables — the foundation of every BC extension.",
+      "description": "Tables, extensions, FlowFields, and CalcFields.",
       "order": 3,
       "lessons": ["creating-tables", "table-extensions", "flowfields-and-calcfields"]
+    },
+    {
+      "id": "module-04-pages",
+      "title": "Pages & User Interface",
+      "description": "Card, List, Document pages and actions.",
+      "order": 4,
+      "lessons": ["page-card", "page-list", "page-document", "page-actions"]
+    },
+    {
+      "id": "module-05-al-language",
+      "title": "AL Language Deep Dive",
+      "description": "Data types, operators, and control structures.",
+      "order": 5,
+      "lessons": ["data-types-and-variables", "operators-and-expressions", "control-structures"]
+    },
+    {
+      "id": "module-06-al-objects",
+      "title": "AL Object Types & Tables",
+      "description": "Object taxonomy and advanced table design.",
+      "order": 6,
+      "lessons": ["al-object-types", "managing-tables-deep-dive"]
+    },
+    {
+      "id": "module-07-reports-integration",
+      "title": "Reports & Integration",
+      "description": "Reports, OData, HttpClient, and XmlPorts.",
+      "order": 7,
+      "lessons": ["creating-reports", "integration-and-web-services"]
+    },
+    {
+      "id": "module-08-advanced-patterns",
+      "title": "Advanced Patterns",
+      "description": "Event subscribers and extension architecture.",
+      "order": 8,
+      "lessons": ["event-subscribers"]
     }
   ]
 }

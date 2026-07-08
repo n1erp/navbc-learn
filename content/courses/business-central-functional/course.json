@@ -1,9 +1,10 @@
 {
   "id": "business-central-functional",
-  "title": "Business Central Functional Consultant",
-  "description": "Master Business Central from a functional perspective. Learn company setup, licensing, finance, sales, purchasing, and manufacturing — aligned with the MB-800 certification path.",
-  "shortDescription": "Functional BC skills: setup, finance, sales, purchasing, and manufacturing.",
-  "slug": "business-central-functional",
+  "title": "Fundamentals",
+  "description": "The complete functional foundation for Business Central consultants. Learn company setup, licensing, finance, sales, purchasing, and manufacturing — aligned with the MB-800 certification path.",
+  "shortDescription": "Complete BC functional path — setup, finance, sales, and manufacturing.",
+  "slug": "functional",
+  "track": "functional",
   "level": "beginner",
   "duration": 360,
   "lessonsCount": 10,
@@ -11,7 +12,7 @@
   "featured": true,
   "published": true,
   "tags": ["functional", "MB-800", "finance", "sales", "manufacturing", "consultant"],
-  "thumbnail": "/images/courses/bc-functional.svg",
+  "thumbnail": "/images/courses/functional-fundamentals.svg",
   "instructor": {
     "name": "NAVBC Team",
     "role": "BC Functional Consultants"
@@ -31,28 +32,28 @@
     {
       "id": "module-01-core-setup",
       "title": "Core Setup & Licensing",
-      "description": "Company creation, environments, and Business Central licensing models.",
+      "description": "Company creation, environments, and licensing.",
       "order": 1,
       "lessons": ["creating-companies", "licensing-and-modules"]
     },
     {
       "id": "module-02-financial-management",
       "title": "Financial Management",
-      "description": "Customer payments, cash flow, and financial operations.",
+      "description": "Customer payments and cash flow.",
       "order": 2,
       "lessons": ["customer-payments"]
     },
     {
       "id": "module-03-sales-purchasing",
       "title": "Sales & Purchasing",
-      "description": "Credit memos, recurring lines, and document workflows.",
+      "description": "Credit memos and recurring document lines.",
       "order": 3,
       "lessons": ["credit-memos", "recurring-sales-lines", "recurring-purchase-lines"]
     },
     {
       "id": "module-04-manufacturing",
       "title": "Manufacturing & Planning",
-      "description": "BOMs, routings, production orders, and item planning parameters.",
+      "description": "BOMs, routings, and item planning.",
       "order": 4,
       "lessons": ["manufacturing-overview", "item-planning", "item-replenishment"]
     }

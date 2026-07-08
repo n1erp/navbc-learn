@@ -64,13 +64,13 @@ export function CTASection() {
               Ready to become a BC developer?
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
-              Start with our free AL Development fundamentals course and build
-              your first Business Central extension today.
+              Pick the Technical or Functional path and start with the free
+              Fundamentals course today.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Button variant="brand" size="lg" asChild>
-                <Link href="/courses/al-development-fundamentals">
-                  Start Free Course
+                <Link href="/learning-paths">
+                  Choose Your Path
                 </Link>
               </Button>
               <Button variant="outline" size="lg" asChild>

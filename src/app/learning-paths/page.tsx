@@ -6,7 +6,7 @@ import { LearningPathsSection } from "@/components/marketing/learning-paths-sect
 export const metadata: Metadata = {
   title: "Learning Paths",
   description:
-    "Structured learning paths to guide your Business Central development journey from beginner to expert.",
+    "Two focused learning paths for Business Central — Technical (AL development) and Functional (consultant).",
   alternates: { canonical: "https://learn.navbc.com/learning-paths" },
 };
 
@@ -20,8 +20,8 @@ export default function LearningPathsPage() {
       <div className="max-w-2xl">
         <h1 className="text-4xl font-bold tracking-tight">Learning Paths</h1>
         <p className="mt-4 text-lg text-muted-foreground">
-          Follow curated roadmaps designed to take you from beginner to
-          production-ready Business Central developer.
+          Choose Technical for AL development or Functional for consultant skills.
+          Each path includes one complete Fundamentals course.
         </p>
       </div>
 

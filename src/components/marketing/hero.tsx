@@ -2,10 +2,15 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-export function Hero() {
+interface HeroProps {
+  courseCount?: number;
+  lessonCount?: number;
+}
+
+export function Hero({ courseCount = 2, lessonCount = 30 }: HeroProps) {
   return (
     <section className="relative overflow-hidden">
       <div className="hero-glow absolute inset-0" />
@@ -18,7 +23,6 @@ export function Hero() {
           transition={{ duration: 0.6 }}
           className="mx-auto max-w-3xl text-center"
         >
-
           <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
             Learn{" "}
             <span className="text-gradient">
@@ -27,33 +31,31 @@ export function Hero() {
           </h1>
 
           <p className="mt-6 text-lg leading-relaxed text-muted-foreground sm:text-xl">
-            Everything you need to master Business Central—from AL development and
-            functional consulting to integrations, reporting, APIs, and real-world
-            projects. Learn at your own pace with practical courses, source code,
-            quizzes, and expert guidance.
+            Two clear learning paths — Technical for AL developers, Functional for
+            consultants. Practical lessons, source code, and real-world guidance.
           </p>
 
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Button variant="brand" size="lg" asChild>
-              <Link href="/courses">
-                Explore Courses
+              <Link href="/learning-paths">
+                Choose Your Path
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </Button>
             <Button variant="outline" size="lg" asChild>
-              <Link href="/learning-paths">View Learning Paths</Link>
+              <Link href="/courses">Browse Courses</Link>
             </Button>
           </div>
 
           <div className="mt-12 flex flex-wrap items-center justify-center gap-8 text-sm text-muted-foreground">
             <div>
-              <span className="block text-2xl font-bold text-foreground">30+</span>
+              <span className="block text-2xl font-bold text-foreground">{lessonCount}+</span>
               Lessons
             </div>
             <div className="h-8 w-px bg-border" />
             <div>
-              <span className="block text-2xl font-bold text-foreground">4</span>
-              Courses
+              <span className="block text-2xl font-bold text-foreground">{courseCount}</span>
+              Paths
             </div>
             <div className="h-8 w-px bg-border" />
             <div>

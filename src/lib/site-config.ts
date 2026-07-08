@@ -30,10 +30,10 @@ export const siteConfig = {
     discussionsEnabled: true,
   },
   nav: [
+    { title: "Learning Path", href: "/learning-paths" },
     { title: "Courses", href: "/courses" },
-    { title: "Learning Paths", href: "/learning-paths" },
-    { title: "Projects", href: "/projects" },
     { title: "Tutorials", href: "/tutorials" },
+    { title: "Projects", href: "/projects" },
     { title: "Contribute", href: "/contribute" },
   ],
 } as const;

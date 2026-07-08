@@ -8,8 +8,7 @@
   "duration": 360,
   "lessonsCount": 4,
   "modulesCount": 2,
-  "featured": true,
-  "published": true,
+  "published": false,
   "tags": ["pages", "UI", "Card", "List", "actions"],
   "thumbnail": "/images/courses/pages-ui.svg",
   "instructor": {

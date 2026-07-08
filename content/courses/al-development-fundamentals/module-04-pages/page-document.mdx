@@ -1,0 +1,79 @@
+---
+title: Creating Page Document
+description: Build Document pages with header fields and a lines subpage for order-style interfaces.
+duration: 35
+difficulty: intermediate
+order: 3
+objectives:
+  - Create Document pages with header and lines
+  - Build Part pages for line items
+  - Link header and lines with SubPageLink
+  - Handle document workflows
+tags:
+  - pages
+  - Document
+  - subpage
+---
+
+## Document Pages
+
+**Document pages** combine a header record with line items — the pattern used for Sales Orders, Purchase Invoices, and journals.
+
+## Header Page
+
+```al title="BonusDocument.Page.al"
+page 50102 "Bonus Document"
+{
+    PageType = Document;
+    SourceTable = "Bonus Header";
+
+    layout
+    {
+        area(Content)
+        {
+            group(General)
+            {
+                field("No."; Rec."No.") { }
+                field("Customer No."; Rec."Customer No.") { }
+                field("Document Date"; Rec."Document Date") { }
+            }
+            part(Lines; "Bonus Subform")
+            {
+                SubPageLink = "Document No." = field("No.");
+            }
+        }
+    }
+}
+```
+
+## Lines Subpage
+
+```al title="BonusSubform.Page.al"
+page 50103 "Bonus Subform"
+{
+    PageType = ListPart;
+    SourceTable = "Bonus Line";
+    AutoSplitKey = true;
+
+    layout
+    {
+        area(Content)
+        {
+            repeater(Lines)
+            {
+                field("Line No."; Rec."Line No.") { Visible = false; }
+                field(Description; Rec.Description) { }
+                field(Amount; Rec.Amount) { }
+            }
+        }
+    }
+}
+```
+
+<Callout type="tip" title="AutoSplitKey">
+`AutoSplitKey = true` automatically creates a new line when the user tabs past the last field — standard BC behavior users expect.
+</Callout>
+
+## Next Steps
+
+Add actions to make your pages interactive and professional.

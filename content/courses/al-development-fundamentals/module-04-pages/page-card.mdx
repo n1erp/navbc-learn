@@ -1,0 +1,103 @@
+---
+title: Creating Page Card
+description: Build Card pages for viewing and editing individual records in Business Central.
+duration: 30
+difficulty: intermediate
+order: 1
+objectives:
+  - Create a Card page bound to a table
+  - Organize fields into groups and FastTabs
+  - Add field validation and ToolTips
+  - Configure ApplicationArea and UsageCategory
+tags:
+  - pages
+  - Card
+  - UI
+---
+
+## Card Pages
+
+A **Card page** displays a single record from a table. It's the primary UI for viewing and editing individual entities like customers, items, or custom records.
+
+## Basic Card Page
+
+```al title="CustomerBonusCard.Page.al"
+page 50100 "Customer Bonus Card"
+{
+    PageType = Card;
+    ApplicationArea = All;
+    UsageCategory = Documents;
+    SourceTable = "Customer Bonus";
+    Caption = 'Customer Bonus Card';
+
+    layout
+    {
+        area(Content)
+        {
+            group(General)
+            {
+                Caption = 'General';
+
+                field("Entry No."; Rec."Entry No.")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the entry number.';
+                    Editable = false;
+                }
+                field("Customer No."; Rec."Customer No.")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the customer number.';
+                }
+                field("Bonus Amount"; Rec."Bonus Amount")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the bonus amount.';
+                }
+            }
+        }
+    }
+}
+```
+
+## FastTabs (Groups)
+
+Organize fields into collapsible sections:
+
+```al
+group(Details)
+{
+    Caption = 'Details';
+
+    field("Bonus Date"; Rec."Bonus Date") { }
+    field("Reason Code"; Rec."Reason Code") { }
+}
+group(Statistics)
+{
+    Caption = 'Statistics';
+
+    field("Total Bonuses"; Rec."Total Bonuses") { }
+}
+```
+
+<Callout type="tip">
+Use meaningful group captions. "General", "Details", and "Statistics" are common BC patterns users expect.
+</Callout>
+
+## Linking Card to List
+
+Every Card page should have a corresponding List page:
+
+```al
+// In Card page:
+CardPageId = "Customer Bonus Card";
+
+// In List page:
+CardPageId = "Customer Bonus Card";
+```
+
+This enables navigation between list and detail views.
+
+## Next Steps
+
+Learn List pages for displaying multiple records in a grid format.

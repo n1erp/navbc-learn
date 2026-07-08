@@ -1,0 +1,94 @@
+---
+title: Operators and Expressions
+description: Use arithmetic, logical, and comparison operators to build expressions in AL code.
+duration: 20
+difficulty: beginner
+order: 2
+objectives:
+  - Apply arithmetic operators for calculations
+  - Use logical and comparison operators in conditions
+  - Build complex expressions for assignments and validations
+tags:
+  - AL
+  - operators
+  - expressions
+  - MB-820
+---
+
+## Arithmetic Operators
+
+| Operator | Operation | Example |
+|----------|-----------|---------|
+| `+` | Addition | `Total := A + B` |
+| `-` | Subtraction | `Balance := Debit - Credit` |
+| `*` | Multiplication | `LineAmount := Qty * Price` |
+| `/` | Division | `UnitCost := TotalCost / Qty` |
+
+```al title="ArithmeticExample.al"
+var
+    Total: Decimal;
+    Quantity: Integer;
+    Price: Decimal;
+begin
+    Quantity := 10;
+    Price := 15.5;
+    Total := Quantity * Price; // Total = 155.0
+end;
+```
+
+## Logical Operators
+
+| Operator | Meaning |
+|----------|---------|
+| `and` | Both conditions must be true |
+| `or` | At least one condition must be true |
+| `not` | Negates the condition |
+
+## Comparison Operators
+
+| Operator | Meaning |
+|----------|---------|
+| `=` | Equal to |
+| `<>` | Not equal to |
+| `<` | Less than |
+| `>` | Greater than |
+| `<=` | Less than or equal |
+| `>=` | Greater than or equal |
+
+```al title="LogicalExample.al"
+var
+    IsActive: Boolean;
+    Count: Integer;
+begin
+    IsActive := true;
+    Count := 5;
+    if IsActive and (Count > 0) then
+        Message('Record is active with count %1', Count);
+end;
+```
+
+## Working with Expressions
+
+Expressions combine operators and values for assignments and conditions:
+
+```al title="DiscountCalculation.al"
+var
+    DiscountRate: Decimal;
+    Price: Decimal;
+    FinalPrice: Decimal;
+begin
+    DiscountRate := 0.1;
+    Price := 100;
+    FinalPrice := Price * (1 - DiscountRate); // FinalPrice = 90
+end;
+```
+
+<Callout type="tip" title="Division Warning">
+Integer division truncates decimals. Use Decimal variables when fractional results matter.
+</Callout>
+
+## Key Revision Points (MB-820)
+
+- AL uses `and`, `or`, `not` (lowercase) for logical operations
+- Comparison operators work on all comparable types
+- Expressions are used in assignments, conditions, and procedure parameters

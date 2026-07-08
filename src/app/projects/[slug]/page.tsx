@@ -76,7 +76,7 @@ export default async function ProjectPage({ params }: PageProps) {
           build the skills you&apos;ll need.
         </p>
         <Button variant="brand" className="mt-6" asChild>
-          <Link href="/courses/al-development-fundamentals">
+          <Link href="/learning-paths">
             Start Learning
             <ArrowRight className="h-4 w-4" />
           </Link>

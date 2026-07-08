@@ -1,0 +1,88 @@
+---
+title: AL Object Types
+description: Complete guide to all AL object types — Tables, Pages, Reports, Codeunits, Queries, XmlPorts, and more.
+duration: 25
+difficulty: beginner
+order: 1
+objectives:
+  - Match each AL object type to its primary purpose
+  - Differentiate data storage objects from presentation objects
+  - Understand when to use Codeunits, Queries, and XmlPorts
+tags:
+  - AL
+  - objects
+  - architecture
+  - MB-820
+---
+
+## Overview
+
+Objects are the fundamental building blocks of AL programming in Business Central. Each object type serves a specific architectural or functional purpose.
+
+## Core AL Object Types
+
+| Object | Purpose | Stores Data? |
+|--------|---------|--------------|
+| **Table** | Data structure and storage | Yes |
+| **Page** | User interface (Card, List, Document, Role Center) | No |
+| **Report** | Formatted output, printing, data export | No |
+| **Codeunit** | Business logic, procedures, event subscribers | No |
+| **Query** | Optimized read-only data retrieval (SQL-like) | No |
+| **XmlPort** | Import/export XML, CSV, and text data | No |
+| **Enum** | Fixed set of named values (replaces Option) | Yes |
+| **Control Add-in** | Custom HTML/JavaScript UI on pages | No |
+| **Profile** | Role Centers and user-specific page customizations | No |
+| **Permission Set** | Security permissions for objects and data | No |
+| **Table Extension** | Add fields/keys to existing tables | Yes |
+| **Page Extension** | Add fields/actions to existing pages | No |
+
+## Data vs Presentation
+
+**Store data:** Table, Table Extension, Enum
+
+**Present or process data:** Page, Report, Query, XmlPort
+
+**Business logic:** Codeunit
+
+<Callout type="info" title="Extension Objects">
+Table Extension, Page Extension, Report Extension, and Enum Extension let you customize the base application without modifying Microsoft code.
+</Callout>
+
+## When to Use Each Object
+
+### Table
+Define new data structures. Every custom entity starts with a table.
+
+### Page
+Show data to users. Every table needs at least a List and Card page.
+
+### Codeunit
+Encapsulate business logic that doesn't belong to a specific table. Posting routines, validations, integrations.
+
+### Report
+Generate printable documents or export data. Invoices, statements, analysis reports.
+
+### Query
+Read-only data aggregation optimized for performance. Used in charts, OData APIs, and reporting.
+
+### XmlPort
+Import/export data in XML, CSV, or fixed-width formats. Data migration and EDI integrations.
+
+## Object ID Ranges
+
+Your extension's `app.json` defines allocated ID ranges:
+
+```json
+"idRanges": [
+    { "from": 50100, "to": 50149 }
+]
+```
+
+All custom objects must use IDs within your allocated range.
+
+## Key Revision Points (MB-820)
+
+- Be able to match object type to purpose
+- Tables store data; Pages/Reports present it
+- Codeunits encapsulate business logic
+- Extension objects customize without modifying base app
